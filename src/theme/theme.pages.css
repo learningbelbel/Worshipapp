@@ -1,0 +1,130 @@
+.page-container {
+    background-color: rgb(255, 250, 250);
+    width: 80%;
+    margin-left: 20%;
+    padding: 2%;
+    height: 100vh;
+}
+
+.card {
+    padding: 2%;
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+.content-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.head-btn input {
+    margin-left: 10px;
+    text-decoration: none;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    background-color: #40e517;
+    color: #fff;
+}
+
+.randomDialog {
+    width: 40vw;
+}
+
+.dialog-content {
+    margin-top: 5%;
+}
+
+.dialog-content li {
+    list-style: none;
+    background-color: rgb(249, 255, 253);
+    margin-bottom: 4px;
+    padding: 0px 5px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dialog-footer {
+    align-items: center;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+    right: 0;
+}
+
+.dialog-footer .footer-btn {
+    margin-right: 0%;
+    margin-top: 1%;
+    float: right;
+}
+
+.calendar-dialog {
+    width: 30vw;
+}
+
+
+.song-field {
+    background-color: #fff;
+    margin: 5px;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+.song-field li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+.song-Note{
+    display: flex;
+    flex-direction: column;
+    /* background-color: #40e517; */
+}
+.song-field .bar{
+    background-color: red;
+    height: 1px;
+    width: 10%;
+    float: left;
+}
+.bar-container{
+    /* height: 200px; */
+}
+@media screen and (max-width: 768px) {
+    .page-container {
+        width: 100%;
+        display: block;
+        justify-content: center;
+        margin-left: 0px;
+
+    }
+
+    .content-header {
+        flex-direction: column;
+    }
+
+    .randomDialog {
+        width: 90vw;
+        height: 90vh;
+        background-color: #000;
+    }
+
+    .dialog-footer {
+        position: absolute;
+        bottom: 0;
+        width: 93%;
+        margin-bottom: 15px;
+        left: 0;
+
+    }
+
+    .calendar-dialog {
+        width: 90vw;
+    }
+
+}
