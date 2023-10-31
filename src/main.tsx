@@ -6,10 +6,8 @@ import { App } from './App'
 import { AuthContext } from "./context/Context.Auth";
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  // <React.StrictMode>
   <AuthContext>
     <App />
   </AuthContext>
 
-  // </React.StrictMode>,
 )

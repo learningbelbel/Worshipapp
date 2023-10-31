@@ -36,7 +36,7 @@ export const CreateRandomListDialog = ({ setIsVisible }: any) => {
     const [songList, setSongList] = useState<SongModel[]>([]);
     const [params, setParams] = useState<ParamsModel>(initialParamsState)
     const [isVisibleCalendar, setIsVisibleCalendar] = useState(false)
-    const chords = ["Am", "Cm"];
+    const chords = ["Am", "Cm", 'Em', 'Dm', 'Gm', 'G','C'];
 
     const handleOnchange = (e: any) => {
         if (e.target.name === 'notes') {
@@ -53,6 +53,9 @@ export const CreateRandomListDialog = ({ setIsVisible }: any) => {
     }
 
     const handleGetRandomSongs = async () => {
+        if(!params.amount || params.notes.length === 0) {
+            return toast?.toast('warn','Error', 'Todos los campos deben estar llenos')
+        }
         const list = await service.getRandomSong(params);
         setSongList(list.data.result)
     }
@@ -87,7 +90,6 @@ export const CreateRandomListDialog = ({ setIsVisible }: any) => {
 
     const renderSongList = () => {
         return songList.map((song: SongModel, index) => {
-            console.log(song)
             return <li key={index}>
                 <span>{song.name}</span>
                 <Dropdown

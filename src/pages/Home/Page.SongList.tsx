@@ -66,7 +66,7 @@ export const HomePage  = () => {
                 </span>
                 <div className="head-btn">
                     <input type="submit" value="Crear Random" onClick={() => setRandomDialogVisible(!randomDialogVisible)} />
-                    <input type="submit" value="Crear Listado" onClick={() => setRegularDialogVisible(!regularDialogVisible)} />
+                    {/* <input type="submit" value="Crear Listado" onClick={() => setRegularDialogVisible(!regularDialogVisible)} /> */}
                 </div>
             </div>
             <div className="card">

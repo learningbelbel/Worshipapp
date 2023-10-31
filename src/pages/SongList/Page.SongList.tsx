@@ -11,6 +11,7 @@ interface SongModel {
 }
 
 export const SongListPage = () => {
+    
     const songService = new SongService();
 
     const [songList, setSongList] = useState<SongModel[]>([]);
@@ -58,15 +59,17 @@ export const SongListPage = () => {
         <div className='page-container'>
             <h2>Listado de Canciones</h2>
 
-            <DataTable
-                value={songList}
-                dataKey="id" paginator rows={20}
-            >
-                {/* <Column selectionMode="multiple" exportable={false}></Column> */}
-                <Column field="name" header="Nombre" sortable ></Column>
-                <Column field="chord" header="Nota" body={chordTemplate} sortable ></Column>
-                <Column field="usage" header="Uso" body={ratingBodyTemplate} sortable></Column>
-            </DataTable>
+            <div className="card">
+                <DataTable
+                    value={songList}
+                    dataKey="id" paginator rows={20}
+                >
+                    {/* <Column selectionMode="multiple" exportable={false}></Column> */}
+                    <Column field="name" header="Nombre" sortable ></Column>
+                    <Column field="chord" header="Nota" body={chordTemplate} sortable ></Column>
+                    <Column field="usage" header="Uso" body={ratingBodyTemplate} sortable></Column>
+                </DataTable>
+            </div>
         </div>
     )
 }
