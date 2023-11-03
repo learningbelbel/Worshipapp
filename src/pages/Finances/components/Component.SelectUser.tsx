@@ -22,7 +22,7 @@ export const SelectUser = ({ setSelectedUser, selectedUser }: any) => {
             onChange={(e) => setSelectedUser(e.value)}
             options={userList}
             optionLabel={'name'}
-            placeholder="Seleccionar Integrantes"
+            placeholder="Seleccionar"
             className="w-full "
         />
     )

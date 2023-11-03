@@ -11,15 +11,16 @@ interface SelectUser {
     id: string;
     name: string;
 }
+const initialSelectedUser: SelectUser = {
+    id: '',
+    name: '',
+}
+
 export const ContributionCreation = ({ setDialogVisibility }: any) => {
 
     const service = new ContributionService();
     const toast = useToast();
 
-    const initialSelectedUser = {
-        id: '',
-        name: '',
-    }
     const [selectedUser, setSelectedUser] = useState<SelectUser>(initialSelectedUser);
     const [dates, setDates] = useState<Nullable<Date[]>>(null);
     const [amount, setAmount] = useState<string>('');

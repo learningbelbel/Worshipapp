@@ -1,7 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 
 export const AxiosInterceptor = () => {
-
     const updateHeader = (request: AxiosRequestConfig) => {
         const token = window.localStorage.getItem('TOKEN');
         const newHeader = {

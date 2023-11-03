@@ -11,12 +11,12 @@ export const LoginPage = () => {
 
     useEffect(()=>{
         if(loggedUserData.isLoggedIn){
-            navigate('/home')
+            navigate('/')
         }
     },[])
 
     return (
-        <div className="login-container ">
+        <div className="login-container">
             <div className="forms-container">
                 <LoginForm />
             </div>

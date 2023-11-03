@@ -6,6 +6,12 @@
     height: 100vh;
 }
 
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .card {
     padding: 2%;
     border-radius: 10px;
@@ -30,8 +36,23 @@
     color: #fff;
 }
 
+.headerDialogStyle {
+    background-color: #000;
+    color: #fff;
+}
+
+.contentDialogStyle {
+    background-color: #000;
+}
+
 .randomDialog {
     width: 40vw;
+    height: 100vh;
+}
+
+.selectSongDialog {
+    width: 90%;
+    height: 100vh;
 }
 
 .dialog-content {
@@ -79,29 +100,41 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
+
 }
-.song-Note{
+
+.song-Note {
     display: flex;
     flex-direction: column;
-    /* background-color: #40e517; */
 }
-.song-field .bar{
-    background-color: red;
-    height: 1px;
-    width: 10%;
-    float: left;
+
+.container-bar {
+    width: 100%;
+    height: 10px;
+    background-color: gray;
+    border-radius: 3px;
+    text-align: center;
 }
-.bar-container{
-    /* height: 200px; */
+
+.dialog-content-style {
+    padding: 0
 }
+
+.cm-footer-dialog-style {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 5%;
+    margin-right: 5%;
+}
+
 @media screen and (max-width: 768px) {
     .page-container {
         width: 100%;
+        padding-top: 15%;
         display: block;
         justify-content: center;
         margin-left: 0px;
-
     }
 
     .content-header {

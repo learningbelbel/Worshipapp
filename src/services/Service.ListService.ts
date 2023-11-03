@@ -10,4 +10,7 @@ export class SongListService {
     async getCurrentList(){
         return await this.httpProvider.get(`${SONG_LIST_ROUTE}/current`)
     }
+    async getAllList(){
+        return await this.httpProvider.get(SONG_LIST_ROUTE)
+    }
 }

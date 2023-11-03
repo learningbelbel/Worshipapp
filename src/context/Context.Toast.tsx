@@ -26,7 +26,7 @@ export const ToastProvider = ({ children }: Props) => {
 
     return (
         <ToastContext.Provider value={{ toast }}>
-            <Toast ref={toastRef} />
+            <Toast ref={toastRef} position="top-center" className='toast'/>
             {children}
         </ToastContext.Provider>
     )

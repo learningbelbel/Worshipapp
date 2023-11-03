@@ -38,7 +38,7 @@ export const RegisterForm = ({ setIsVisible }: any) => {
     const handleRegister = async () => {
         const resp = await service.createUser(userData);
         console.log(resp);
-        if (resp.response.status === 200) {
+        if (resp.status === 200) {
             toast?.toast('success', 'Completado', 'Registro completado');
         }
         setIsVisible(false)

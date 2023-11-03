@@ -42,8 +42,8 @@ export const LoginForm = () => {
         try {
             const resp = await service.post(loginData);
             handleLogin(resp.data);
-            toast?.toast('success', 'Bienvenido', 'Haz Iniciado sesión Exitosamente!')
-            navigate('/home')
+            // toast?.toast('success', 'Bienvenido', 'Haz Iniciado sesión Exitosamente!')
+            window.location.reload();
         } catch (error: any) {
             handleLogout();
             if (error.code === 'ERR_BAD_REQUEST')

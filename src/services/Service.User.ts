@@ -7,4 +7,7 @@ export class UserService {
     async getUsers(){
         return this.httpProvider.get(`${USER_ROUTE}/list`);
     }
+    async getUserContributions(){
+        return this.httpProvider.get(`${USER_ROUTE}/contributions`);
+    }
 }

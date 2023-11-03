@@ -1,10 +1,9 @@
-import { Link } from 'react-router-dom';
 import { Dialog } from 'primereact/dialog';
 import { addLocale } from 'primereact/api';
 import { ContributionCreation } from './components/Component.ContributionCreation';
 import { useState } from 'react';
 import { TableDisplay } from './components/Component.TableDisplay';
-import { TableComponent } from './components/Component.Table';
+import { Button } from 'primereact/button';
 
 addLocale('es', {
     firstDayOfWeek: 1,
@@ -22,28 +21,25 @@ export const FinancesPage = () => {
     const [dialogVisibility, setDialogVisibility] = useState(false);
 
     return (
-        <div className="page-container col-12">
+        <div className="page-container">
 
-            <div className="table-container">
-                <div className="flex justify-content-between align-items-center">
-                    <h1>Plan 5</h1>
-                    <span>
-                        <Link to="#" onClick={() => setDialogVisibility(true)}>Crear Aporte</Link>
-                    </span>
-                </div>
-
-                <div>
-                    <TableDisplay />
-                </div>
-                <hr/>
-                <br/>
-                <div className='card m-2'>
-                <TableComponent />
-
-                </div>
+            <div className="page-header">
+                <h1>Plan 5</h1>
+                <Button
+                    className='header-btn'
+                    label="Crear Aporte"
+                    onClick={() => setDialogVisibility(true)} />
             </div>
 
-            <Dialog header="Crear Aporte" visible={dialogVisibility} onHide={() => setDialogVisibility(false)} style={{ minWidth: '50%' }}>
+            <div className="page-content">
+                <TableDisplay />
+            </div>
+
+            <Dialog
+                header="Crear Aporte"
+                visible={dialogVisibility}
+                onHide={() => setDialogVisibility(false)}
+                style={{ minWidth: '50%' }}>
                 <ContributionCreation
                     setDialogVisibility={setDialogVisibility} />
             </Dialog>
