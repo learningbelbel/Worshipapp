@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { SelectUser } from './Component.SelectUser';
 import { ContributionService } from "../../../services/Service.Contribution";
 import { useToast } from "../../../context/Context.Toast";
+import { Dialog } from "primereact/dialog";
 
 interface SelectUser {
     id: string;
@@ -16,7 +17,7 @@ const initialSelectedUser: SelectUser = {
     name: '',
 }
 
-export const ContributionCreation = ({ setDialogVisibility }: any) => {
+export const ContributionCreation = ({ setDialogVisibility, dialogVisibility }: any) => {
 
     const service = new ContributionService();
     const toast = useToast();
@@ -42,7 +43,12 @@ export const ContributionCreation = ({ setDialogVisibility }: any) => {
     }
 
     return (
-        <>
+        <Dialog
+            header="Crear Aporte"
+            visible={dialogVisibility}
+            onHide={() => setDialogVisibility(false)}
+            style={{ minWidth: '50%' }}>
+
             <div className="card flex align-items-center col-11">
                 <label className='col-4' htmlFor="">Integrantes: </label>
                 <SelectUser
@@ -72,6 +78,7 @@ export const ContributionCreation = ({ setDialogVisibility }: any) => {
             <div className='card flex flex-row-reverse col-11'>
                 <Button label='Guardar' onClick={() => handleEmptyField()} />
             </div>
-        </>
+        </Dialog >
+
     )
 }

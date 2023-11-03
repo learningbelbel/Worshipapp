@@ -45,9 +45,9 @@ export const CreateRandomListDialog = ({ setIsVisible, isVisible }: any) => {
         setSongList(list.data.result)
     }
 
-    const chordTemplate = (rowData: SongModel, i: any) => {
-        return rowData.chord.map((chord: []) => {
-            return <small key={i}>{chord} <br /></small>
+    const chordTemplate = (rowData: SongModel) => {
+        return rowData.chord.map((chord: [], index: number) => {
+            return <small key={index}>{chord} <br /></small>
         });
     }
 
@@ -94,9 +94,7 @@ export const CreateRandomListDialog = ({ setIsVisible, isVisible }: any) => {
                     <ScrollPanel style={{ width: '100%', height: '46vh' }}>
                         <DataTable
                             value={songList}
-                            reorderableColumns
-                            reorderableRows
-                            onRowReorder={(e) => setSongList(e.value)}>
+                            id="_id">
                             <Column field='name' header='Nombre' headerStyle={{ display: 'none' }} />
                             <Column field='chord' header='Nota' headerStyle={{ display: 'none' }} body={chordTemplate} />
                         </DataTable>

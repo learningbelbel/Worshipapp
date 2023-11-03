@@ -1,4 +1,3 @@
-import { Dialog } from 'primereact/dialog';
 import { addLocale } from 'primereact/api';
 import { ContributionCreation } from './components/Component.ContributionCreation';
 import { useState } from 'react';
@@ -35,14 +34,10 @@ export const FinancesPage = () => {
                 <TableDisplay />
             </div>
 
-            <Dialog
-                header="Crear Aporte"
-                visible={dialogVisibility}
-                onHide={() => setDialogVisibility(false)}
-                style={{ minWidth: '50%' }}>
-                <ContributionCreation
-                    setDialogVisibility={setDialogVisibility} />
-            </Dialog>
+
+            <ContributionCreation
+                dialogVisibility={dialogVisibility}
+                setDialogVisibility={setDialogVisibility} />
 
         </div>
     );

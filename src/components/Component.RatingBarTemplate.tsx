@@ -1,5 +1,5 @@
 export const RatingBarTemplate = ({ rowData, amount, i }: any) => {
-    const percentaje = (rowData.usage / amount) * 100;
+    const percentaje = parseFloat(((rowData.usage / amount) * 100).toFixed(0));
     return (
         <div className="container-bar" key={i}>
             <div style={{

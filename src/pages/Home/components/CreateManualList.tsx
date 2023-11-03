@@ -50,7 +50,6 @@ export const CreateListDialog = ({ setRegularDialogVisible, regularDialogVisible
         return (
             <Button
                 label="Continuar"
-                className=""
                 onClick={() => { setIsVisible(true) }} />
         )
     }

@@ -3,8 +3,9 @@ import { useState } from 'react';
 import { useToast } from '../../../context/Context.Toast';
 import { FaUserCircle } from 'react-icons/fa';
 import { RegisterService } from '../../../services/Service.Register';
+import { Dialog } from 'primereact/dialog';
 
-export const RegisterForm = ({ setIsVisible }: any) => {
+export const RegisterForm = ({ setIsVisible, isVisible }: any) => {
 
     const service = new RegisterService();
     const toast = useToast();
@@ -47,53 +48,58 @@ export const RegisterForm = ({ setIsVisible }: any) => {
 
 
     return (
-        <div className='form-container'>
-            <span>
-                <FaUserCircle className="icon" />
-            </span>
-            <h1>Registrarme</h1>
+        <Dialog visible={isVisible} onHide={() => setIsVisible(false)}
+            className="dialog"
+            contentStyle={{ backgroundColor: 'rgba(0,0,0,0.8)' }}
+            headerStyle={{ backgroundColor: 'rgba(0,0,0,0.8)' }}>
+            <div className='form-container'>
+                <span>
+                    <FaUserCircle className="icon" />
+                </span>
+                <h1>Registrarme</h1>
 
-            <form className="form-content" onSubmit={handleEmptyFields}>
-                <div className="form-field">
-                    <InputTextComponent
-                        name="name"
-                        placeholder="Nombre"
-                        type="text"
-                        onChange={handleOnchange}
-                    />
-                </div>
-                <div className="form-field">
-                    <InputTextComponent
-                        name="lastName"
-                        placeholder="Apellido"
-                        type="text"
-                        onChange={handleOnchange}
-                    />
-                </div>
-                <div className="form-field">
+                <form className="form-content" onSubmit={handleEmptyFields}>
+                    <div className="form-field">
+                        <InputTextComponent
+                            name="name"
+                            placeholder="Nombre"
+                            type="text"
+                            onChange={handleOnchange}
+                        />
+                    </div>
+                    <div className="form-field">
+                        <InputTextComponent
+                            name="lastName"
+                            placeholder="Apellido"
+                            type="text"
+                            onChange={handleOnchange}
+                        />
+                    </div>
+                    <div className="form-field">
 
-                    <InputTextComponent
-                        name="email"
-                        placeholder="Email"
-                        type="email"
-                        onChange={handleOnchange}
-                    />
-                </div>
-                <div className="form-field">
+                        <InputTextComponent
+                            name="email"
+                            placeholder="Email"
+                            type="email"
+                            onChange={handleOnchange}
+                        />
+                    </div>
+                    <div className="form-field">
 
-                    <InputTextComponent
-                        name='password'
-                        type="password"
-                        placeholder='Contraseña'
-                        onChange={handleOnchange}
-                    />
+                        <InputTextComponent
+                            name='password'
+                            type="password"
+                            placeholder='Contraseña'
+                            onChange={handleOnchange}
+                        />
+                    </div>
+                </form>
+                <div className="button-container">
+                    <button onClick={handleEmptyFields}>Registrarme</button>
                 </div>
-            </form>
-            <div className="button-container">
-                <button onClick={handleEmptyFields}>Registrarme</button>
+
+
             </div>
-
-
-        </div>
+        </Dialog>
     )
 }

@@ -4,14 +4,12 @@ import { FaUserCircle } from 'react-icons/fa'
 import { useState } from 'react';
 import { LoginService } from "../../../services/Service.Login";
 import { useAuthContext } from "../../../context/Context.Auth";
-import { useNavigate } from "react-router-dom";
 import { Dialog } from 'primereact/dialog'
 import { RegisterForm } from "./RegisterForm";
 
 export const LoginForm = () => {
 
     const { handleLogin, handleLogout } = useAuthContext()!;
-    const navigate = useNavigate();
     const toast = useToast();
     const service = new LoginService();
 
@@ -85,12 +83,9 @@ export const LoginForm = () => {
                 <span onClick={() => setIsVisible(true)}>Registrarme</span>
             </div>
 
-            <Dialog visible={isVisible} onHide={() => setIsVisible(false)}
-                className="dialog"
-                contentStyle={{ backgroundColor: 'rgba(0,0,0,0.8)' }}
-                headerStyle={{ backgroundColor: 'rgba(0,0,0,0.8)' }}>
-                <RegisterForm setIsVisible={setIsVisible}/>
-            </Dialog>
-        </div>
+
+            <RegisterForm setIsVisible={setIsVisible}
+                isVisible={isVisible} />
+        </div >
     )
 }

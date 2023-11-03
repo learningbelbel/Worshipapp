@@ -38,7 +38,6 @@ export const DisplayList = ({ setRandomDialogVisible, randomDialogVisible,
             <div className="card">
                 <DataTable
                     value={currentSongList?.songs}>
-                    <Column rowReorder style={{ width: '3rem' }} />
                     <Column field='name' header='Nombre' />
                     <Column field='chord' header='Nota' />
                 </DataTable>
