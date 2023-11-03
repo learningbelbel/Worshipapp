@@ -4,7 +4,6 @@ import { FaUserCircle } from 'react-icons/fa'
 import { useState } from 'react';
 import { LoginService } from "../../../services/Service.Login";
 import { useAuthContext } from "../../../context/Context.Auth";
-import { Dialog } from 'primereact/dialog'
 import { RegisterForm } from "./RegisterForm";
 
 export const LoginForm = () => {
