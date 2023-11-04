@@ -4,10 +4,11 @@ import { useState } from 'react';
 import { useAuthContext } from '../context/Context.Auth';
 import { RoutesData } from '../config/Config.Routes';
 import { AiOutlineAlignLeft } from 'react-icons/ai';
+import { Button } from 'primereact/button';
 
 export const BarNavigation = () => {
     const [isMenuVisible, setIsMenuVisible] = useState(false);
-    const { loggedUserData } = useAuthContext()!;
+    const { loggedUserData, handleLogout } = useAuthContext()!;
 
     return (
 
@@ -40,7 +41,11 @@ export const BarNavigation = () => {
 
                                         })
                                     }
+
+                                    <Button style={{ padding: '5px', fontSize: '12px' }} onClick={handleLogout} label='Logout' />
+
                                 </ul>
+
                             </div>
                         </div>
                     </>
