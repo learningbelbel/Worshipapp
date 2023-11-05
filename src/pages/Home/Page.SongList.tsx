@@ -2,7 +2,7 @@ import { useState } from "react"
 import { CreateRandomListDialog } from "./components/CreateAutomaticList";
 import { CreateListDialog } from "./components/CreateManualList";
 import { DisplayList } from "./components/DisplayList";
-import '../../theme/theme.pages.css'
+// import '../../theme/theme.pages.css'
 
 export const HomePage = () => {
 

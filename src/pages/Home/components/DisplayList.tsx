@@ -30,8 +30,8 @@ export const DisplayList = ({ setRandomDialogVisible, randomDialogVisible,
             <div className="content-header align-items-center mb-2 ">
                 <h1>Listado Actual</h1>
                 <div className="">
-                    <Button className="mr-2" label="Crear Random" onClick={() => setRandomDialogVisible(!randomDialogVisible)} />
-                    <Button className="ml-2" label="Crear Manual" onClick={() => setRegularDialogVisible(!regularDialogVisible)} />
+                    <Button className="mr-2" label="Random" onClick={() => setRandomDialogVisible(!randomDialogVisible)} />
+                    <Button className="ml-2" label="Manual" onClick={() => setRegularDialogVisible(!regularDialogVisible)} />
                 </div>
             </div>
 

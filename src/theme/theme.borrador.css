@@ -1,0 +1,65 @@
+* {
+    margin: 0;
+}
+
+.app-container {
+    display: flex;
+}
+
+.nav-container {
+    position: fixed;
+    width: 100%;
+
+}
+
+.horizontal-nav {
+    background-color: blue;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+    height: 7.5vh;
+
+}
+
+.open-closeMenu {
+    cursor: pointer;
+    background-color: red;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+}
+
+.vertical-bar-container {
+    background-color: yellow;
+    width: 20%;
+    height: 100vh;
+    margin-left: 0;
+    transition: .8s;
+    position: fixed;
+    margin-top: 10vh;
+
+}
+
+.vertical-bar-container.active {
+    margin-left: -50%;
+}
+
+.vertical-bar-container.active+.page-container {
+    background-color: red;
+    width: 100%;
+    transition: .5s;
+    margin-left: 0%;
+}
+
+.page-container {
+    width: 80%;
+    transition: .5s;
+    margin-left: 0px;
+    float: right;
+    margin-left: 20%;
+    margin-left: 20%;
+
+}

@@ -53,7 +53,6 @@ export const RoutesData: RouterModel = {
     'default': {
         routes: [
             {
-                title: 'INICIO',
                 path: '/login',
                 element: <LoginPage />
             },

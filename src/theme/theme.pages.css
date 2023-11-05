@@ -69,10 +69,11 @@
 @media screen and (max-width: 768px) {
     .page-container {
         width: 100%;
+        transition: .5s;
+        margin-left: 0;
         padding-top: 15%;
         display: block;
         justify-content: center;
-        margin-left: 0px;
     }
 
     .content-header {

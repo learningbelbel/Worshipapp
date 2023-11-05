@@ -1,4 +1,3 @@
-import '../theme/theme.barNavigation.css'
 import { Link } from 'react-router-dom'
 import { useState } from 'react';
 import { useAuthContext } from '../context/Context.Auth';
@@ -10,11 +9,17 @@ export const BarNavigation = () => {
     const [isMenuVisible, setIsMenuVisible] = useState(false);
     const { loggedUserData, handleLogout } = useAuthContext()!;
 
-    return (
+    const profile = loggedUserData.user.profile
 
-        <div className='nav-container'>
-            {
-                loggedUserData.isLoggedIn && (
+    const logoutHandling = () => {
+        handleLogout()
+        window.location.reload();
+    }
+
+    return (
+        <>
+            <div className='nav-container'>
+                {loggedUserData.isLoggedIn && (
                     <>
                         <div className="horizontal-nav">
                             <div className="logo">
@@ -24,34 +29,44 @@ export const BarNavigation = () => {
                                 <AiOutlineAlignLeft onClick={() => setIsMenuVisible(!isMenuVisible)} />
                             </div>
                         </div>
-                        <div className={
-                            isMenuVisible ? 'vertical-bar-container' : 'vertical-bar-container active'}>
-                            <div className="nav-menu">
-                                <ul>
-                                    {
-                                        RoutesData[`${loggedUserData.user.profile}`].routes.map((route, index) => {
-                                            return <li key={index}>
-                                                <Link className='link' to={route.path}>
-                                                    <span className='route-icon'>
-                                                        {route.icon}
-                                                    </span>
-                                                    {route.title}
-                                                </Link>
-                                            </li>
 
-                                        })
-                                    }
-
-                                    <Button style={{ padding: '5px', fontSize: '12px' }} onClick={handleLogout} label='Logout' />
-
-                                </ul>
-
-                            </div>
-                        </div>
                     </>
                 )
-            }
-        </div>
+                }
+            </div>
+            {loggedUserData.isLoggedIn && (
+                <>
+                    <div className={
+                        isMenuVisible ? 'vertical-bar-container' : 'vertical-bar-container active'}>
+                        <div className="nav-menu">
+                            <ul>
+                                {
+                                    RoutesData[`${profile}`].routes.map((route, index) => {
+                                        return <li key={index}>
+                                            <Link className='link' to={route.path}>
+                                                <span className='route-icon'>
+                                                    {route.icon}
+                                                </span>
+                                                {route.title}
+                                            </Link>
+                                        </li>
+
+                                    })
+                                }
+                            </ul>
+                        </div>
+                        <div className="config-btns">
+                            <Button
+                                style={{ padding: '5px', fontSize: '12px' }}
+                                onClick={logoutHandling}
+                                severity='danger'
+                                label=''
+                                icon='pi pi-power-off' />
+                        </div>
+                    </div>
+                </>
+            )}
+        </>
 
 
     )
