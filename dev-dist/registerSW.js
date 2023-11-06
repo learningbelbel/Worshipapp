@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) navigator.serviceWorker.register('/Worshipapp/dev-sw.js?dev-sw', { scope: '/Worshipapp/', type: 'classic' })

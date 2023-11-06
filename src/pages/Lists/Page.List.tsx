@@ -32,7 +32,14 @@ export const ListPage = () => {
             < >
                 {
                     data.songs.map((song: any, i: number) => {
-                        return <li className="p-3" key={i}>{song.name}</li>
+                        return <li className="p-3 flex justify-content-between" key={i}>
+                            <span>
+                                {song.name}
+                            </span>
+                            <span>
+                                {song.chord}
+                            </span>
+                        </li>
                     })
                 }
             </>
