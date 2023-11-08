@@ -75,6 +75,7 @@ export const AuthContext = ({ children }: Props) => {
     const handleLogin = useCallback((userData: LoggedUserData) => {
         window.localStorage.setItem(LOGGED_USER, JSON.stringify(userData));
         window.localStorage.setItem(TOKEN, userData.token);
+        window.localStorage.setItem('ProfilePicture', userData.user.profilePictureUrl);
     }, [])
 
     const handleLogout = useCallback(() => {

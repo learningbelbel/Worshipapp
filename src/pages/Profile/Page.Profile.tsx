@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { UserMember } from '../../models/Model.RegularUser';
-import { DOMAIN } from '../../config/Config.EndPoints';
+import { STORAGE_URL } from '../../config/Config.EndPoints';
 import { UserService } from '../../services/Service.User';
 import { ProfilePictureComponent } from './components/ProfilePictureComponent';
 import { UserInformation } from './components/UserInformation';
@@ -20,7 +20,6 @@ export const ProfilePage = () => {
 
     const [userInformation, setUserInformation] = useState<UserMember>(initalUserInformation);
     const [profilePicture, setProfilePicture] = useState('');
-    const [newPicture, setNewPicture] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
@@ -29,12 +28,11 @@ export const ProfilePage = () => {
 
     const fetchUserInformation = async () => {
         const resp = await userService.getUsersById();
+
         if (resp.status === 200) {
             setUserInformation(resp.data.result);
-            setProfilePicture(`${DOMAIN}/${resp.data.result.profilePicture}`)
-            setNewPicture(null)
+            setProfilePicture(`${STORAGE_URL}/${resp.data.result.profilePicture}`)
         }
-
     }
 
     return (
@@ -42,12 +40,12 @@ export const ProfilePage = () => {
             <ProfilePictureComponent
                 profilePicture={profilePicture}
                 userInformation={userInformation}
-                setNewPicture={setNewPicture}
+                setIsLoading={setIsLoading}
+s
             />
             <UserInformation
                 userInformation={userInformation}
                 setUserInformation={setUserInformation}
-                newPicture={newPicture}
                 setIsLoading={setIsLoading}
             />
 

@@ -1,8 +1,14 @@
 import { Avatar } from 'primereact/avatar'
 import { FileUpload } from 'primereact/fileupload'
+import { UserService } from '../../../services/Service.User';
+import { useToast } from '../../../context/Context.Toast';
+
+export const ProfilePictureComponent = ({ profilePicture, userInformation, setIsLoading }: any) => {
 
 
-export const ProfilePictureComponent = ({ profilePicture, userInformation, setNewPicture }: any) => {
+    const userService = new UserService();
+    const toast = useToast();
+
 
     const chooseOptions = {
         icon: 'pi pi-pencil',
@@ -11,19 +17,36 @@ export const ProfilePictureComponent = ({ profilePicture, userInformation, setNe
     };
 
     const handleFileChange = (event: any) => {
-        setNewPicture(event.files[0]);
-
+        handleSave(event.files[0]);
     };
+
+    const handleSave = async (pic: any) => {
+        if (!pic) {
+            return toast?.toast('warn', 'Error', 'Por favor selecciona una Imagen')
+        }
+
+        const formData = new FormData();
+        formData.append("profilePicture", pic);
+        setIsLoading(true)
+
+        const resp = await userService.updateProfilePicture(formData);
+        if (resp.status === 200) {
+            toast?.toast('success', 'Exito', 'Foto de Perfil Cambiada!');
+            window.location.reload();
+        }
+        setIsLoading(true)
+    }
 
     return (
         <div className="profile-picture-container">
             <div className="picture pt-2">
                 <Avatar
-                    image={profilePicture}
+                    image={`${profilePicture}`}
                     size="xlarge"
                     shape="circle"
                     className='img'
                 />
+
                 <FileUpload
                     mode="basic"
                     name="profilePicture"

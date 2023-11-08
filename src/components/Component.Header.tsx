@@ -1,5 +1,5 @@
 import { MenuItem } from "primereact/menuitem";
-import { DOMAIN } from "../config/Config.EndPoints";
+import { STORAGE_URL } from "../config/Config.EndPoints";
 import { useAuthContext } from "../context/Context.Auth";
 import { AiOutlineAlignLeft } from "react-icons/ai";
 import { Menu } from "primereact/menu";
@@ -17,7 +17,7 @@ export const HeaderComponent = ({setIsMenuVisible, isMenuVisible}:Props) => {
 
     const { loggedUserData, handleLogout } = useAuthContext()!;
     const menu = useRef<Menu>(null);
-    const profilePicture = `${DOMAIN}/${loggedUserData.user.profilePictureUrl}`
+    const profilePicture = `${STORAGE_URL}/${loggedUserData.user.profilePictureUrl}`
 
     const menuItems: MenuItem[] = [
         {

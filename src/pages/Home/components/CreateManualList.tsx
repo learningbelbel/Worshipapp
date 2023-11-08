@@ -81,7 +81,7 @@ export const CreateListDialog = ({ setRegularDialogVisible, regularDialogVisible
                         header="Nombre"
                         filterPlaceholder="Buscar por Nombre"
                         style={{ fontSize: '14px' }}
-                        filterHeaderStyle={{ position: 'absolute', zIndex: 100, padding: '0.5%', bottom: 0 }}
+                        filterHeaderStyle={{ zIndex: 100, padding: '0.5%' }}
                         sortable
 
                         filter />

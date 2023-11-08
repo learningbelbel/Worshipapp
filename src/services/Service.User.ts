@@ -1,4 +1,4 @@
-import { USER_ROUTE } from '../config/Config.EndPoints';
+import { UPLOADS, USER_ROUTE } from '../config/Config.EndPoints';
 import { HttpProvider } from './HttpProvider';
 
 export class UserService {
@@ -20,6 +20,6 @@ export class UserService {
         return this.httpProvider.get(`${USER_ROUTE}/userFinances`);
     }
     async updateProfilePicture(data: any){
-        return this.httpProvider.post(`${USER_ROUTE}/upload`, data);
+        return this.httpProvider.post(UPLOADS, data);
     }
 }
