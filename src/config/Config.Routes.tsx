@@ -8,6 +8,7 @@ import { AiOutlineContainer, AiOutlineHome } from 'react-icons/ai';
 import { BsMusicNoteBeamed, BsMusicNoteList } from 'react-icons/bs'
 import { ProfilePage } from "../pages/Profile/Page.Profile";
 import { UserFinancesPage } from "../pages/UserFinances/Page.UserFinances";
+import { UserListPage } from "../pages/UserLists/Page.UserLists";
 interface RouteModel {
     title?: string;
     icon?: React.ReactNode;
@@ -42,10 +43,14 @@ export const RoutesData: RouterModel = {
                 icon: <BsMusicNoteList/>
             },
             {
-                title: 'MI APORTES',
+                title: 'MIS APORTES',
                 path: '/myFinances',
                 element: <UserFinancesPage />,
                 icon: <AiOutlineContainer/>
+            },
+            {
+                path: '/myLists',
+                element: <UserListPage/>
             },
             {
                 path: '/profile',
@@ -83,10 +88,14 @@ export const RoutesData: RouterModel = {
                 icon: <AiOutlineContainer/>
             },
             {
-                title: 'MI APORTES',
+                title: 'MIS APORTES',
                 path: '/myFinances',
                 element: <UserFinancesPage />,
                 icon: <AiOutlineContainer/>
+            },
+            {
+                path: '/myLists',
+                element: <UserListPage/>
             },
             {
                 path: '/profile',
@@ -124,7 +133,7 @@ export const RoutesData: RouterModel = {
                 icon: <AiOutlineContainer/>
             },
             {
-                title: 'MI APORTES',
+                title: 'MIS APORTES',
                 path: '/myFinances',
                 element: <UserFinancesPage />,
                 icon: <AiOutlineContainer/>

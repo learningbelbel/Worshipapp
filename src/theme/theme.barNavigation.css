@@ -81,9 +81,9 @@ body {
     }
 
     .header-content .logo {
-        display: none;
+        padding: 0;
     }
-
+    
     .header-content .open-closeMenu {
         display: flex;
         cursor: pointer;

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { UserService } from '../../services/Service.User';
 import { ContributionTables } from '../../components/Component.ContributionTable';
 import { TableTemplate } from '../../components/Component.TableTemplate';
+import { PrimaryTitle } from '../../styledComponents/PrimaryTitle';
 
 const controls = [
     { name: 'Control de Plan 5', value: 'contributions' },
@@ -55,7 +56,7 @@ export const UserFinancesPage = () => {
             {
                 displayControl === 'contributions' && (
                     <div className="card">
-                        <h1>Plan 5</h1>
+                        <PrimaryTitle title='Plan 5'/>
                         <ContributionTables data={userData.contributions} />
                     </div>
                 )
@@ -64,7 +65,7 @@ export const UserFinancesPage = () => {
             {
                 displayControl === 'promises' && (
                     <div className="card">
-                        <h1>Promesas de Construcción</h1>
+                        <PrimaryTitle title='Promesas de Contrucción'/>
                         <TableTemplate data={userData.promises}  timeHeader={"Mes"} timeField="month"/>
                     </div>
                 )
@@ -72,7 +73,7 @@ export const UserFinancesPage = () => {
             {
                 displayControl === 'tithes' && (
                     <div className="card">
-                        <h1>Diezmos</h1>
+                        <PrimaryTitle title='Diezmos'/>
                         <TableTemplate data={userData.tithes} timeHeader={"Mes"} timeField="month"/>
                     </div>
                 )}

@@ -3,6 +3,7 @@ import { DataTable } from "primereact/datatable"
 import { SongListService } from "../../../services/Service.ListService";
 import { useState, useEffect } from 'react';
 import { Button } from "primereact/button";
+import { PrimaryTitle } from "../../../styledComponents/PrimaryTitle";
 
 interface Props {
     setRandomDialogVisible: any;
@@ -27,11 +28,13 @@ export const DisplayList = ({ setRandomDialogVisible, randomDialogVisible,
 
     return (
         <div>
-            <div className="content-header align-items-center mb-2 ">
-                <h1>Listado Actual</h1>
-                <div className="">
-                    <Button className="mr-2" label="Random" onClick={() => setRandomDialogVisible(!randomDialogVisible)} />
-                    <Button className="ml-2" label="Manual" onClick={() => setRegularDialogVisible(!regularDialogVisible)} />
+            <div className="salign-items-center mb-2 ">
+                <div className="card col-12 content-header">
+                    <PrimaryTitle title="Listado Actual" />
+                    <div className="">
+                        <Button className="mr-2" label="Random" onClick={() => setRandomDialogVisible(!randomDialogVisible)} />
+                        <Button className="ml-2" label="Manual" onClick={() => setRegularDialogVisible(!regularDialogVisible)} />
+                    </div>
                 </div>
             </div>
 

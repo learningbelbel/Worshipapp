@@ -16,7 +16,10 @@ export const UserInformation = ({ userInformation, newPicture, setIsLoading, set
         formData.append("profilePicture", newPicture);
         setIsLoading(true)
 
-        await userService.updateProfilePicture(formData);
+        const resp = await userService.updateProfilePicture(formData);
+        if(resp.status === 200) {
+            toast?.toast('success','Exito', 'Foto de Perfil Cambiada!')
+        }
         setIsLoading(false)
 
     }

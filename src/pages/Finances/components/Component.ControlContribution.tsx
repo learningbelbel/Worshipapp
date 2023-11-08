@@ -2,6 +2,7 @@ import { Column } from "primereact/column"
 import { DataTable, DataTableExpandedRows, DataTableValueArray } from "primereact/datatable"
 import { useState } from 'react';
 import { TableTemplate } from "../../../components/Component.TableTemplate";
+import { PrimaryTitle } from "../../../styledComponents/PrimaryTitle";
 
 export const ContributionControl = ({ user }: any) => {
 
@@ -23,7 +24,7 @@ export const ContributionControl = ({ user }: any) => {
 
         <div className="card mb-2">
             <div className="page-header">
-                <h1>Control de Plan 5</h1>
+                <PrimaryTitle title="Control de Plan 5"/>
             </div>
             <DataTable
                 value={user}

@@ -29,8 +29,12 @@ export const ProfilePage = () => {
 
     const fetchUserInformation = async () => {
         const resp = await userService.getUsersById();
-        setUserInformation(resp.data.result);
-        setProfilePicture(`${DOMAIN}/${resp.data.result.profilePicture}`)
+        if (resp.status === 200) {
+            setUserInformation(resp.data.result);
+            setProfilePicture(`${DOMAIN}/${resp.data.result.profilePicture}`)
+            setNewPicture(null)
+        }
+
     }
 
     return (

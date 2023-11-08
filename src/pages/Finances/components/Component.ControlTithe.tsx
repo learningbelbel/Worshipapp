@@ -2,6 +2,7 @@ import { Column } from "primereact/column"
 import { DataTable, DataTableExpandedRows, DataTableValueArray } from "primereact/datatable"
 import { useState } from "react";
 import { TableTemplate } from "../../../components/Component.TableTemplate";
+import { PrimaryTitle } from "../../../styledComponents/PrimaryTitle";
 
 export const TitheControl = ({ user }: any) => {
 
@@ -22,7 +23,7 @@ export const TitheControl = ({ user }: any) => {
     return (
         <div className="card mb-2">
             <div className="page-header">
-                <h1>Control de Diezmos</h1>
+                <PrimaryTitle title="Control de Diezmos"/>
             </div>
             <DataTable
                 value={user}

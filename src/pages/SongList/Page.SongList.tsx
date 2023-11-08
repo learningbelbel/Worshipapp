@@ -4,7 +4,9 @@ export const SongListPage = () => {
 
     return (
         <div className='page-container'>
-            <h2>Listado de Canciones</h2>
+            <div className="card mb-2">
+                <h2>Listado de Canciones</h2>
+            </div>
             <DataTableContainer />
         </div>
     )

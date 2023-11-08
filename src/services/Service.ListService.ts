@@ -7,10 +7,13 @@ export class SongListService {
     async createList(data: any) {
         return await this.httpProvider.post(SONG_LIST_ROUTE, data)
     }
-    async getCurrentList(){
+    async getCurrentList() {
         return await this.httpProvider.get(`${SONG_LIST_ROUTE}/current`)
     }
-    async getAllList(){
+    async getAllList() {
         return await this.httpProvider.get(SONG_LIST_ROUTE)
+    }
+    async getListByUser() {
+        return await this.httpProvider.get(`${SONG_LIST_ROUTE}/userLists`);
     }
 }

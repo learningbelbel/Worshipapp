@@ -8,6 +8,7 @@ import { Dialog } from "primereact/dialog";
 import { OrdenarListComponent } from "./OrderComponent";
 import { RatingBarTemplate } from "../../../components/Component.RatingBarTemplate";
 import { ChordTamplate } from "../../../components/Component.ChordTamplate";
+import { useToast } from "../../../context/Context.Toast";
 
 interface Props {
     setRegularDialogVisible: any;
@@ -17,6 +18,7 @@ interface Props {
 export const CreateListDialog = ({ setRegularDialogVisible, regularDialogVisible }: Props) => {
 
     const service = new SongService();
+    const toast = useToast();
 
     const [songList, setSongList] = useState([]);
     const [listAmount, setListAmount] = useState(0);
@@ -46,58 +48,64 @@ export const CreateListDialog = ({ setRegularDialogVisible, regularDialogVisible
         setSelectedSong(value);
     };
 
-    const footerTemplate = () => {
-        return (
-            <Button
-                label="Continuar"
-                onClick={() => { setIsVisible(true) }} />
-        )
+    const handleDisplayOrderDialog = () => {
+        if (selectedSong?.length === 0)
+            return toast?.toast('warn', 'Error', 'La lista es vacía.')
+        setIsVisible(true)
     }
 
+
     return (
-        <Dialog
-            className="selectSongDialog"
-            header="Seleccionar Canciones"
-            visible={regularDialogVisible}
-            contentClassName='dialog-content-style'
-            footer={footerTemplate}
-            onHide={() => setRegularDialogVisible(false)}>
+        <>
+            <Dialog
+                className="selectSongDialog"
+                header="Seleccionar Canciones"
+                visible={regularDialogVisible}
+                contentClassName='dialog-content-style'
+                onHide={() => setRegularDialogVisible(false)}>
 
-            <DataTable
-                scrollable
-                scrollHeight="70vh"
-                value={songList}
-                dataKey="_id"
-                selection={selectedSong}
-                tableStyle={{ width: '100%' }}
-                filterDisplay="row"
-                onSelectionChange={onSelectionChange}>
-                <Column
-                    selectionMode="multiple"
-                    exportable={false} />
-                <Column
-                    field="name"
-                    header="Nombre"
-                    filterPlaceholder="Buscar por Nombre"
-                    style={{ fontSize: '14px' }}
-                    filterHeaderStyle={{ position: 'absolute', padding: '0.5%', bottom: 0, backgroundColor: 'transparent' }}
-                    sortable
+                <DataTable
+                    scrollable
+                    scrollHeight="70vh"
+                    value={songList}
+                    dataKey="_id"
+                    selection={selectedSong}
+                    className="songsTable"
+                    filterDisplay="row"
+                    onSelectionChange={onSelectionChange}>
+                    <Column
+                        selectionMode="multiple"
+                        exportable={false} />
+                    <Column
+                        field="name"
+                        header="Nombre"
+                        filterPlaceholder="Buscar por Nombre"
+                        style={{ fontSize: '14px' }}
+                        filterHeaderStyle={{ position: 'absolute', zIndex: 100, padding: '0.5%', bottom: 0 }}
+                        sortable
 
-                    filter />
-                <Column
-                    field="chord"
-                    header="Nota"
-                    style={{ fontSize: '12px', textAlign: 'center', padding: '0' }}
-                    body={chordTemplate}
-                    sortable />
-                <Column
-                    field="usage"
-                    header="Uso"
-                    body={ratingBodyTemplate}
-                    style={{ width: '100px' }}
-                    sortable />
-            </DataTable>
+                        filter />
+                    <Column
+                        field="chord"
+                        header="Nota"
+                        style={{ fontSize: '12px', textAlign: 'center', padding: '0' }}
+                        body={chordTemplate}
+                        sortable />
+                    <Column
+                        field="usage"
+                        header="Uso"
+                        body={ratingBodyTemplate}
+                        style={{ width: '100px' }}
+                        sortable />
+                </DataTable>
+                <div className="cm-footer-dialog-style" >
+                    <Button
+                        label="Continuar"
+                        onClick={handleDisplayOrderDialog}
+                    />
+                </div>
 
+            </Dialog>
             <OrdenarListComponent
                 setIsVisibleSongList={setIsVisible}
                 isVisibleSongList={isVisible}
@@ -105,7 +113,6 @@ export const CreateListDialog = ({ setRegularDialogVisible, regularDialogVisible
                 setSongList={setSelectedSong}
                 setIsVisible={setIsVisible}
             />
-        </Dialog>
-
+        </>
     )
 }

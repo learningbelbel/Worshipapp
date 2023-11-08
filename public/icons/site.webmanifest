@@ -1,7 +1,6 @@
 {
-    "name": "JORBAND",
-    "short_name": "JORBAND",
-    "start_url": "/",
+    "name": "",
+    "short_name": "",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",

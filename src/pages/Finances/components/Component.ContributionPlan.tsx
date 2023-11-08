@@ -5,6 +5,7 @@ import { UserService } from '../../../services/Service.User';
 import { Button } from "primereact/button";
 import { ContributionCreation } from "./Component.CreateContribution";
 import { ContributionTables } from "../../../components/Component.ContributionTable";
+import { PrimaryTitle } from "../../../styledComponents/PrimaryTitle";
 
 interface Contribution {
     date: string;
@@ -17,7 +18,7 @@ interface User {
 }
 
 export const PlanDisplay = () => {
-    
+
     const userService = new UserService();
 
     const [userData, setUserDat] = useState<User[]>([]);
@@ -50,7 +51,7 @@ export const PlanDisplay = () => {
     return (
         <div className="card mb-2">
             <div className="page-header">
-                <h1> Plan 5</h1>
+                <PrimaryTitle title="Plan 5" />
                 <Button
                     className='header-btn'
                     label="Crear Registro"
