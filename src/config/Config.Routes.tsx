@@ -6,6 +6,8 @@ import { ListPage } from "../pages/Lists/Page.List";
 import { FinancesPage } from "../pages/Finances/Page.Finances";
 import { AiOutlineContainer, AiOutlineHome } from 'react-icons/ai';
 import { BsMusicNoteBeamed, BsMusicNoteList } from 'react-icons/bs'
+import { ProfilePage } from "../pages/Profile/Page.Profile";
+import { UserFinancesPage } from "../pages/UserFinances/Page.UserFinances";
 interface RouteModel {
     title?: string;
     icon?: React.ReactNode;
@@ -19,7 +21,42 @@ interface RouterModel {
 }
 
 export const RoutesData: RouterModel = {
-    'Team_Member': {
+    'MUSICIAN': {
+        routes: [
+            {
+                title: 'INICIO',
+                path: '/',
+                element: <HomePage />,
+                icon: <AiOutlineHome />
+            },
+            {
+                title: 'CANCIONES',
+                path: '/songs',
+                element: <SongListPage />,
+                icon: <BsMusicNoteBeamed />
+            },
+            {
+                title: 'LISTADOS',
+                path: '/songList',
+                element: <ListPage />,
+                icon: <BsMusicNoteList/>
+            },
+            {
+                title: 'MI APORTES',
+                path: '/myFinances',
+                element: <UserFinancesPage />,
+                icon: <AiOutlineContainer/>
+            },
+            {
+                path: '/profile',
+                element: <ProfilePage />,
+            },
+            {
+                path: '*', element: <Navigate to="/" />
+            }
+        ]
+    },
+    'TREASURER': {
         routes: [
             {
                 title: 'INICIO',
@@ -44,6 +81,57 @@ export const RoutesData: RouterModel = {
                 path: '/finances',
                 element: <FinancesPage />,
                 icon: <AiOutlineContainer/>
+            },
+            {
+                title: 'MI APORTES',
+                path: '/myFinances',
+                element: <UserFinancesPage />,
+                icon: <AiOutlineContainer/>
+            },
+            {
+                path: '/profile',
+                element: <ProfilePage />,
+            },
+            {
+                path: '*', element: <Navigate to="/" />
+            }
+        ]
+    },
+    'SECRETARY': {
+        routes: [
+            {
+                title: 'INICIO',
+                path: '/',
+                element: <HomePage />,
+                icon: <AiOutlineHome />
+            },
+            {
+                title: 'CANCIONES',
+                path: '/songs',
+                element: <SongListPage />,
+                icon: <BsMusicNoteBeamed />
+            },
+            {
+                title: 'LISTADOS',
+                path: '/songList',
+                element: <ListPage />,
+                icon: <BsMusicNoteList/>
+            },
+            {
+                title: 'FINANZAS',
+                path: '/finances',
+                element: <FinancesPage />,
+                icon: <AiOutlineContainer/>
+            },
+            {
+                title: 'MI APORTES',
+                path: '/myFinances',
+                element: <UserFinancesPage />,
+                icon: <AiOutlineContainer/>
+            },
+            {
+                path: '/profile',
+                element: <ProfilePage />,
             },
             {
                 path: '*', element: <Navigate to="/" />

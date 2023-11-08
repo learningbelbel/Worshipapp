@@ -14,6 +14,7 @@ interface LoggedUserData {
         name: string;
         email: string;
         profile: string;
+        profilePictureUrl: string;
     },
     token: string;
     isLoggedIn: boolean;
@@ -23,6 +24,7 @@ interface ContextType {
     loggedUserData: LoggedUserData;
     handleLogin: (userData: LoggedUserData) => void;
     handleLogout: () => void
+    updateLoggedUserData: (userData: LoggedUserData) => void
 }
 
 interface Props {
@@ -37,7 +39,8 @@ export const AuthContext = ({ children }: Props) => {
         user: {
             name: '',
             email: '',
-            profile: ''
+            profile: '',
+            profilePictureUrl: '',
         },
         token: '',
         isLoggedIn: false
@@ -78,11 +81,15 @@ export const AuthContext = ({ children }: Props) => {
         window.localStorage.removeItem(LOGGED_USER);
         window.localStorage.removeItem(TOKEN);
     }, [])
+    const updateLoggedUserData = useCallback((userData: LoggedUserData) => {
+        window.localStorage.setItem(LOGGED_USER, JSON.stringify(userData));
+    },[])
 
     const useAuthContextValue = useMemo(() => ({
         loggedUserData,
         handleLogin,
-        handleLogout
+        handleLogout,
+        updateLoggedUserData
 
     }), [loggedUserData])
 

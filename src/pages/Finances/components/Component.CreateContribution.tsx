@@ -1,45 +1,44 @@
 import { Button } from "primereact/button"
 import { Calendar } from "primereact/calendar"
 import { InputText } from "primereact/inputtext"
-import { Nullable } from "primereact/ts-helpers";
 import { useState } from 'react';
 import { SelectUser } from './Component.SelectUser';
 import { ContributionService } from "../../../services/Service.Contribution";
 import { useToast } from "../../../context/Context.Toast";
 import { Dialog } from "primereact/dialog";
-
-interface SelectUser {
-    id: string;
-    name: string;
-}
-const initialSelectedUser: SelectUser = {
-    id: '',
-    name: '',
-}
+import { onChangeFunc } from "../../../utils/Util.HandleOnchange";
 
 export const ContributionCreation = ({ setDialogVisibility, dialogVisibility }: any) => {
 
     const service = new ContributionService();
     const toast = useToast();
+    
+    const initialContributionData = {
+        userId: '',
+        dates: [],
+        amount: '',
+    }
 
-    const [selectedUser, setSelectedUser] = useState<SelectUser>(initialSelectedUser);
-    const [dates, setDates] = useState<Nullable<Date[]>>(null);
-    const [amount, setAmount] = useState<string>('');
+    const [contributionData, setContributionData]= useState(initialContributionData);
 
     const handleEmptyField = () => {
-        if (!selectedUser || !dates || !amount) {
+        if (!contributionData.userId || !contributionData.amount || contributionData.dates.length === 0) {
             return toast?.toast('warn', 'Error', 'Debes de llenar todos lo campos.')
         }
         handleSave();
     }
 
     const handleSave = async () => {
-        const response = await service.createContribution({ userId: selectedUser.id, dates: dates, amount: amount })
+        const response = await service.createContribution(contributionData)
         if (response.status === 200) {
             console.log(response);
             toast?.toast('success', 'Exito', 'Aporte Guardado exitosamente.')
             setDialogVisibility(false)
         }
+    }
+
+    const handleOnchange = (e:any)=>{
+        onChangeFunc(e, contributionData, setContributionData);
     }
 
     return (
@@ -52,19 +51,21 @@ export const ContributionCreation = ({ setDialogVisibility, dialogVisibility }: 
             <div className="card flex align-items-center col-11">
                 <label className='col-4' htmlFor="">Integrantes: </label>
                 <SelectUser
-                    selectedUser={selectedUser}
-                    setSelectedUser={setSelectedUser}
+                    selectedUser={contributionData.userId}
+                    name='userId'
+                    onChange={handleOnchange}
                 />
             </div>
 
             <div className="card flex align-items-center mt-2 col-11">
                 <label className='col-4' htmlFor="">Fecha: </label>
                 <Calendar
-                    value={dates}
-                    onChange={(e) => setDates(e.value)}
+                    value={contributionData.dates}
+                    onChange={handleOnchange}
                     selectionMode="multiple"
                     dateFormat='dd/MM'
                     readOnlyInput
+                    name="dates"
                     locale='es'
                     className="w-full "
                 />
@@ -72,7 +73,7 @@ export const ContributionCreation = ({ setDialogVisibility, dialogVisibility }: 
 
             <div className="card flex align-items-center mt-2 col-11">
                 <label className='col-4' htmlFor="">Aporte Total: </label>
-                <InputText value={amount} onChange={(e) => setAmount(e.target.value)} className="w-full" />
+                <InputText value={contributionData.amount} name="amount" onChange={handleOnchange} className="w-full" />
             </div>
 
             <div className='card flex flex-row-reverse col-11'>

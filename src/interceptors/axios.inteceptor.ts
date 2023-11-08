@@ -2,10 +2,13 @@ import axios, { AxiosRequestConfig } from 'axios';
 
 export const AxiosInterceptor = () => {
     const updateHeader = (request: AxiosRequestConfig) => {
+
         const token = window.localStorage.getItem('TOKEN');
         const newHeader = {
             Authorization: token,
-            'Content-Type': 'application/json',
+            'Content-Type': request.url?.includes('upload')
+                ? 'multipart/form-data'
+                : 'application/json',
         }
         request.headers = newHeader;
         return request;

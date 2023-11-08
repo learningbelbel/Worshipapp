@@ -1,44 +1,24 @@
-import { addLocale } from 'primereact/api';
-import { ContributionCreation } from './components/Component.ContributionCreation';
-import { useState } from 'react';
-import { TableDisplay } from './components/Component.TableDisplay';
-import { Button } from 'primereact/button';
-
-addLocale('es', {
-    firstDayOfWeek: 1,
-    dayNames: ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'],
-    dayNamesShort: ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'],
-    dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
-    monthNames: ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'],
-    monthNamesShort: ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'],
-    today: 'Hoy',
-    clear: 'Limpiar'
-});
+import { FinancesControl } from './FinancesControl';
+import { PlanDisplay } from './components/Component.ContributionPlan';
+import { useAuthContext } from "../../context/Context.Auth";
 
 export const FinancesPage = () => {
-
-    const [dialogVisibility, setDialogVisibility] = useState(false);
+    const { loggedUserData: { user } } = useAuthContext()!;
 
     return (
         <div className="page-container">
-
-            <div className="page-header">
-                <h1>Plan 5</h1>
-                <Button
-                    className='header-btn'
-                    label="Crear Aporte"
-                    onClick={() => setDialogVisibility(true)} />
-            </div>
-
             <div className="page-content">
-                <TableDisplay />
+                {
+                    user.profile.includes('TREASURER') && (
+                        <PlanDisplay />
+                    )
+                }
+                {
+                    user.profile.includes('SECRETARY') && (
+                        <FinancesControl />
+                    )
+                }
             </div>
-
-
-            <ContributionCreation
-                dialogVisibility={dialogVisibility}
-                setDialogVisibility={setDialogVisibility} />
-
         </div>
     );
 }

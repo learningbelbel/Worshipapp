@@ -59,6 +59,22 @@ export const CreateRandomListDialog = ({ setIsVisible, isVisible }: any) => {
         }</>
     }
 
+    const deleteSong = (rowData:any) =>{
+        console.log(rowData);
+
+        const updateList = songList.filter(song => song._id !== rowData._id )
+        console.log(updateList);
+        setSongList(updateList);
+    }
+
+    const actionBodyTemplate = (rowData: any) => {
+        return (
+            <>
+                <Button icon="pi pi-trash"  style={{border: 'none'}} outlined severity="danger" onClick={() => deleteSong(rowData)} />
+            </>
+        );
+    };
+
     return (
         <Dialog
             header="Nuevo Listado"
@@ -97,6 +113,8 @@ export const CreateRandomListDialog = ({ setIsVisible, isVisible }: any) => {
                             id="_id">
                             <Column field='name' header='Nombre' headerStyle={{ display: 'none' }} />
                             <Column field='chord' header='Nota' headerStyle={{ display: 'none' }} body={chordTemplate} />
+                            <Column body={actionBodyTemplate} headerStyle={{ display: 'none' }}  exportable={false}></Column>
+
                         </DataTable>
                     </ScrollPanel>
                 )

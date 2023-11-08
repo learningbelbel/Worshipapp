@@ -41,7 +41,9 @@ export const OrdenarListComponent = ({ setIsVisibleSongList, isVisibleSongList, 
         <div>
             <div className="pt-3 mb-3 flex justify-content-between align-items-center">
                 <label> Seleccionar Fecha: </label>
-                <Calendar value={listDate} onChange={(e) => setListDate(e.value)} />
+                <Calendar value={listDate} onChange={(e) => setListDate(e.value)}
+                    locale='es'
+                />
             </div>
             <Button label="Cancelar" icon="pi pi-times" onClick={() => setIsVisibleSongList(false)} className="p-button-text" severity="danger" />
             <Button label="Guardar" icon="pi pi-check" onClick={() => handleVerifySong()} autoFocus severity="success" />

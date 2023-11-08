@@ -1,43 +1,78 @@
 import { Link } from 'react-router-dom'
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useAuthContext } from '../context/Context.Auth';
 import { RoutesData } from '../config/Config.Routes';
 import { AiOutlineAlignLeft } from 'react-icons/ai';
-import { Button } from 'primereact/button';
+import { Menu } from 'primereact/menu';
+import { MenuItem } from 'primereact/menuitem';
+import { Avatar } from 'primereact/avatar';
+import { DOMAIN } from '../config/Config.EndPoints';
 
 export const BarNavigation = () => {
-    const [isMenuVisible, setIsMenuVisible] = useState(false);
+
     const { loggedUserData, handleLogout } = useAuthContext()!;
 
+    const [isMenuVisible, setIsMenuVisible] = useState(false);
+    const menu = useRef<Menu>(null);
     const profile = loggedUserData.user.profile
+    const profilePicture = `${DOMAIN}/${loggedUserData.user.profilePictureUrl}`
 
     const logoutHandling = () => {
         handleLogout()
         window.location.reload();
     }
 
+    const menuItems: MenuItem[] = [
+        {
+            label: `${loggedUserData.user.name}`,
+            items: [
+                {
+                    label: 'Perfil',
+                    icon: 'pi pi-user',
+                    url: '/profile'
+                },
+                {
+                    label: 'Cerrar Sesión',
+                    icon: 'pi pi-power-off',
+                    command: () => {
+                        logoutHandling()
+                    }
+                }
+            ]
+        }
+    ];
+
     return (
         <>
-            <div className='nav-container'>
+            <div className='header-container'>
                 {loggedUserData.isLoggedIn && (
-                    <>
-                        <div className="horizontal-nav">
-                            <div className="logo">
-                                <h1>Worship</h1>
-                            </div>
-                            <div className="open-closeMenu">
-                                <AiOutlineAlignLeft onClick={() => setIsMenuVisible(!isMenuVisible)} />
-                            </div>
+                    <div className="header-content">
+                        <div className="logo">
+                            <h1>Worship</h1>
                         </div>
+                        <div className="open-closeMenu" onClick={() => setIsMenuVisible(!isMenuVisible)}>
+                            <AiOutlineAlignLeft />
+                        </div>
+                        <div className="p-0 flex justify-content-center" style={{backgroundColor: 'transparent', marginRight: '20px'}}>
+                            <Menu model={menuItems}
+                                popup
+                                ref={menu}
+                                popupAlignment="right" />
+                            <Avatar
+                                image={profilePicture}
+                                size="large"
+                                shape="circle"
+                                onClick={(event) => menu.current?.toggle(event)} />
+                        </div>
+                    </div>
 
-                    </>
                 )
                 }
             </div>
             {loggedUserData.isLoggedIn && (
                 <>
                     <div className={
-                        isMenuVisible ? 'vertical-bar-container' : 'vertical-bar-container active'}>
+                        !isMenuVisible ? 'nav-container' : 'nav-container active'}>
                         <div className="nav-menu">
                             <ul>
                                 {
@@ -54,14 +89,6 @@ export const BarNavigation = () => {
                                     })
                                 }
                             </ul>
-                        </div>
-                        <div className="config-btns">
-                            <Button
-                                style={{ padding: '5px', fontSize: '12px' }}
-                                onClick={logoutHandling}
-                                severity='danger'
-                                label=''
-                                icon='pi pi-power-off' />
                         </div>
                     </div>
                 </>

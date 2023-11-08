@@ -2,7 +2,7 @@ import { Dropdown } from 'primereact/dropdown'
 import { useState, useEffect } from 'react';
 import { UserService } from '../../../services/Service.User';
 
-export const SelectUser = ({ setSelectedUser, selectedUser }: any) => {
+export const SelectUser = ({ selectedUser, name, onChange }: any) => {
 
     const [userList, setUserList] = useState([]);
     const userService = new UserService();
@@ -17,11 +17,13 @@ export const SelectUser = ({ setSelectedUser, selectedUser }: any) => {
     }
 
     return (
-        <Dropdown 
+        <Dropdown
             value={selectedUser}
-            onChange={(e) => setSelectedUser(e.value)}
+            onChange={onChange}
             options={userList}
             optionLabel={'name'}
+            optionValue='id'
+            name={name}
             placeholder="Seleccionar"
             className="w-full "
         />
