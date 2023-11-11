@@ -44,12 +44,14 @@ export const CreateControl = ({ setDialogVisibility, dialogVisibility, setIsLoad
 
     const handleEmptyField = () => {
 
+        console.log(controlData)
+
         if (controlData.type === 'contribution') {
             if (!controlData.userId || controlData.dates.length === 0)
                 return toast?.toast('warn', 'Error', 'Debes de llenar todos lo campos.')
         } else {
-            if (!controlData.month || !controlData.type)
-                return toast?.toast('warn', 'Error', 'Debes de llenar todos lo campos. 2')
+            if (!controlData.userId || !controlData.month || !controlData.type)
+                return toast?.toast('warn', 'Error', 'Debes de llenar todos lo campos. ')
         }
 
         handleSave();

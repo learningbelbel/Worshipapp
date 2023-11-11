@@ -3,12 +3,13 @@ import { HomePage } from "../pages/Home/Page.SongList";
 import { LoginPage } from "../pages/Login/Page.Login";
 import { SongListPage } from "../pages/SongList/Page.SongList";
 import { ListPage } from "../pages/Lists/Page.List";
-import { FinancesPage } from "../pages/Finances/Page.Finances";
+import { ContributionsPage } from "../pages/Contributions/Page.Finances";
 import { AiOutlineContainer, AiOutlineHome } from 'react-icons/ai';
 import { BsMusicNoteBeamed, BsMusicNoteList } from 'react-icons/bs'
 import { ProfilePage } from "../pages/Profile/Page.Profile";
 import { UserFinancesPage } from "../pages/UserFinances/Page.UserFinances";
 import { UserListPage } from "../pages/UserLists/Page.UserLists";
+import { FinancesPage } from "../pages/Finances/Page.Finances";
 interface RouteModel {
     title?: string;
     icon?: React.ReactNode;
@@ -43,10 +44,14 @@ export const RoutesData: RouterModel = {
                 icon: <BsMusicNoteList/>
             },
             {
-                title: 'MIS APORTES',
+                title: 'FINANZAS',
+                path: '/finances',
+                element: <FinancesPage />,
+                icon: <AiOutlineContainer/>
+            },
+            {
                 path: '/myFinances',
                 element: <UserFinancesPage />,
-                icon: <AiOutlineContainer/>
             },
             {
                 path: '/myLists',
@@ -82,16 +87,20 @@ export const RoutesData: RouterModel = {
                 icon: <BsMusicNoteList/>
             },
             {
+                title: 'APORTES',
+                path: '/contributions',
+                element: <ContributionsPage />,
+                icon: <AiOutlineContainer/>
+            },
+            {
                 title: 'FINANZAS',
                 path: '/finances',
                 element: <FinancesPage />,
                 icon: <AiOutlineContainer/>
             },
             {
-                title: 'MIS APORTES',
                 path: '/myFinances',
                 element: <UserFinancesPage />,
-                icon: <AiOutlineContainer/>
             },
             {
                 path: '/myLists',
@@ -127,16 +136,20 @@ export const RoutesData: RouterModel = {
                 icon: <BsMusicNoteList/>
             },
             {
+                title: 'APORTES',
+                path: '/contributions',
+                element: <ContributionsPage />,
+                icon: <AiOutlineContainer/>
+            },
+            {
                 title: 'FINANZAS',
                 path: '/finances',
                 element: <FinancesPage />,
                 icon: <AiOutlineContainer/>
             },
             {
-                title: 'MIS APORTES',
                 path: '/myFinances',
                 element: <UserFinancesPage />,
-                icon: <AiOutlineContainer/>
             },
             {
                 path: '/profile',

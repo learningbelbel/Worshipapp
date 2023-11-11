@@ -34,6 +34,11 @@ export const HeaderComponent = ({setIsMenuVisible, isMenuVisible}:Props) => {
                     url: '/myLists'
                 },
                 {
+                    label: 'Mis Aportes',
+                    icon: 'pi pi-money-bill',
+                    url: '/myFinances'
+                },
+                {
                     label: 'Cerrar Sesión',
                     icon: 'pi pi-power-off',
                     command: () => {

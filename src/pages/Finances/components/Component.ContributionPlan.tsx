@@ -1,75 +1,78 @@
-import { Column } from "primereact/column"
-import { useState, useEffect } from 'react';
-import { DataTable, DataTableExpandedRows, DataTableValueArray } from "primereact/datatable";
-import { UserService } from '../../../services/Service.User';
-import { Button } from "primereact/button";
-import { ContributionCreation } from "./Component.CreateContribution";
-import { ContributionTables } from "../../../components/Component.ContributionTable";
-import { PrimaryTitle } from "../../../styledComponents/PrimaryTitle";
+import { FinancialRecords } from "../../../services/Service.FinancialRecords"
+import { useEffect, useState } from 'react';
 
-interface Contribution {
-    date: string;
-    amount: number,
-}
+export const ContributionPlan = () => {
 
-interface User {
-    name: string;
-    contributions?: Contribution[];
-}
+    const service = new FinancialRecords();
 
-export const PlanDisplay = () => {
-
-    const userService = new UserService();
-
-    const [userData, setUserDat] = useState<User[]>([]);
-    const [expandedRows, setExpandedRows] = useState<DataTableExpandedRows | DataTableValueArray | undefined>(undefined);
-    const [dialogVisibility, setDialogVisibility] = useState(false);
+    const [totalPlan, setTotalPlan] = useState(0);
+    const [totalIncomes, setTotalIncomes] = useState(0);
+    const [totalExpenses, setTotalExpenses] = useState(0);
 
     useEffect(() => {
-        fetchUserData();
-    }, []);
+        handleGetTotalPlan();
+        handleGetTotalIncomes();
+        handleGetTotalExpenses();
+    }, [])
 
-    const fetchUserData = async () => {
-        const resp = await userService.getUserContributions();
-        if (resp.status === 200) {
-            setUserDat(resp.data.result)
-        }
+    const handleGetTotalPlan = async () => {
+        const resp = await service.getPlanContributionTotal();
+        setTotalPlan(resp.data.result);
     }
 
-    const allowExpansion = (rowData: User) => {
-        return rowData.contributions!.length > 0;
-    };
-
-    const rowExpansionTemplate = (data: User) => {
-        return (
-            <div className="p-0">
-                <ContributionTables data={data.contributions} />
-            </div>
-        );
-    };
+    const handleGetTotalIncomes = async () => {
+        const resp = await service.getTotalIncomes();
+        setTotalIncomes(resp.data.result);
+    }
+    const handleGetTotalExpenses = async () => {
+        const resp = await service.getTotalExpenses();
+        setTotalExpenses(resp.data.result);
+    }
 
     return (
-        <div className="card mb-2">
-            <div className="page-header">
-                <PrimaryTitle title="Plan 5" />
-                <Button
-                    className='header-btn'
-                    label="Crear Registro"
-                    onClick={() => setDialogVisibility(true)} />
+        <div className="flex flex-wrap justify-content-center gap-3">
+            <div className="container">
+                <div className="card-container">
+                    <div className="card-content">
+                        <h2 className="text-blue">Q. {totalPlan}</h2>
+                        <p>PLAN 5</p>
+                    </div>
+                    <div className="icon-container ">
+                        <i className="pi pi-dollar background-blue" />
+                    </div>
+                </div>
             </div>
-            <DataTable
-                value={userData}
-                expandedRows={expandedRows}
-                onRowToggle={(e) => setExpandedRows(e.data)}
-                rowExpansionTemplate={rowExpansionTemplate}
-                dataKey="id">
-                <Column expander={allowExpansion} style={{ width: '5rem' }} />
-                <Column field="name" header="Nombre" sortable></Column>
-            </DataTable>
+            <div className="container ">
+                <div className="card-container">
+                    <div className="card-content">
+                        <h2 className="text-green">Q. {totalIncomes}</h2>
+                        <p>INGRESOS</p>
+                    </div>
+                    <div className="icon-container ">
+                        <i className="pi pi-dollar background-green" />
+                    </div>
+                </div>
+            </div>
+            <div className="container">
+                <div className="card-container">
+                    <div className="card-content">
+                        <h2>Q. {totalExpenses}</h2>
+                        <p>EGRESOS</p>
+                    </div>
+                    <div className="icon-container ">
+                        <i className="pi pi-dollar background-red" />
+                    </div>
+                </div>
+            </div>
 
-            <ContributionCreation
-                dialogVisibility={dialogVisibility}
-                setDialogVisibility={setDialogVisibility} />
+            <div className="container mb-3">
+                <div className="card-container">
+                    <div className="w-full text-center">
+                        <h2>Total</h2>
+                        <h2>Q. {totalPlan + totalIncomes - totalExpenses}</h2>
+                    </div>
+                </div>
+            </div>
         </div>
-    );
+    )
 }
