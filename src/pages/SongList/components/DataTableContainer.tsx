@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { SongModel } from "../../../models/Model.Song";
 import { RatingBarTemplate } from "../../../components/Component.RatingBarTemplate";
-import { ChordTamplate } from "../../../components/Component.ChordTamplate";
+import { ChordTemplate } from "../../../components/Component.ChordTemplate";
 
 export const DataTableContainer = () => {
 
@@ -13,19 +13,22 @@ export const DataTableContainer = () => {
 
     const [songList, setSongList] = useState<SongModel[]>([]);
     const [listAmount, setListAmount] = useState(0);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         getSongService();
     }, [])
 
     const getSongService = async () => {
+        setLoading(true);
         const resp = await songService.getAllSong();
         setSongList(resp.data.result);
         setListAmount(resp.data.listCount)
+        setLoading(false);
     }
 
     const chordTemplate = (rowData: any) => {
-        return <ChordTamplate rowData={rowData} />
+        return <ChordTemplate rowData={rowData} />
     }
 
     const ratingBodyTemplate = (rowData: any, i: any) => {
@@ -36,6 +39,8 @@ export const DataTableContainer = () => {
             <DataTable
                 value={songList}
                 paginator
+                loading={loading}
+                emptyMessage="Sin datos"
                 rows={20}>
                 <Column field="name" header="Nombre" sortable />
                 <Column field="chord" header="Nota" body={chordTemplate} sortable />

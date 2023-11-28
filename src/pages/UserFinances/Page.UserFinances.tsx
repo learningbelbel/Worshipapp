@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { UserService } from '../../services/Service.User';
 import { ContributionTables } from '../../components/Component.ContributionTable';
 import { TableTemplate } from '../../components/Component.TableTemplate';
-import { PrimaryTitle } from '../../styledComponents/PrimaryTitle';
+import { PrimaryTitle } from '../../styled-components/PrimaryTitle';
 
 const controls = [
     { name: 'Control de Plan 5', value: 'contributions' },
@@ -33,7 +33,6 @@ export const UserFinancesPage = () => {
 
     const fetchUserFinances = async () => {
         const resp = await userService.getFinancesByUser();
-        console.log(resp)
         if (resp.status === 200) {
             setUserData(resp.data.result);
         }

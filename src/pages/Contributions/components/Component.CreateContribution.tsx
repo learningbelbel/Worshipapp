@@ -31,7 +31,6 @@ export const ContributionCreation = ({ setDialogVisibility, dialogVisibility }: 
     const handleSave = async () => {
         const response = await service.createContribution(contributionData)
         if (response.status === 200) {
-            console.log(response);
             toast?.toast('success', 'Exito', 'Aporte Guardado exitosamente.')
             setDialogVisibility(false)
         }

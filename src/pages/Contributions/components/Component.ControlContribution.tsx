@@ -2,7 +2,7 @@ import { Column } from "primereact/column"
 import { DataTable, DataTableExpandedRows, DataTableValueArray } from "primereact/datatable"
 import { useState } from 'react';
 import { TableTemplate } from "../../../components/Component.TableTemplate";
-import { PrimaryTitle } from "../../../styledComponents/PrimaryTitle";
+import { PrimaryTitle } from "../../../styled-components/PrimaryTitle";
 
 export const ContributionControl = ({ user }: any) => {
 
@@ -24,9 +24,10 @@ export const ContributionControl = ({ user }: any) => {
 
         <div className="card mb-2">
             <div className="page-header">
-                <PrimaryTitle title="Control de Plan 5"/>
+                <PrimaryTitle title="Control de Plan 5" />
             </div>
             <DataTable
+                emptyMessage="Sin Datos"
                 value={user}
                 expandedRows={expandedRows}
                 onRowToggle={(e) => setExpandedRows(e.data)}

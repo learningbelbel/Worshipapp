@@ -5,9 +5,9 @@ import { useEffect } from 'react';
 import { Column } from "primereact/column";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
-import { OrdenarListComponent } from "./OrderComponent";
+import { OrdenarListComponent } from "./Component.OrderSongList";
 import { RatingBarTemplate } from "../../../components/Component.RatingBarTemplate";
-import { ChordTamplate } from "../../../components/Component.ChordTamplate";
+import { ChordTemplate } from "../../../components/Component.ChordTemplate";
 import { useToast } from "../../../context/Context.Toast";
 
 interface Props {
@@ -30,9 +30,11 @@ export const CreateListDialog = ({ setRegularDialogVisible, regularDialogVisible
     }, [])
 
     const getSongList = async () => {
-        const res = await service.getAllSong();
-        setListAmount(res.data.listCount)
-        setSongList(res.data.result);
+
+            const res = await service.getAllSong();
+            setListAmount(res.data.listCount)
+            setSongList(res.data.result);
+
     }
 
     const ratingBodyTemplate = (rowData: any, i: any) => {
@@ -40,7 +42,7 @@ export const CreateListDialog = ({ setRegularDialogVisible, regularDialogVisible
     };
 
     const chordTemplate = (rowData: any) => {
-        return <ChordTamplate rowData={rowData} />
+        return <ChordTemplate rowData={rowData} />
     }
 
     const onSelectionChange = (event: any) => {
@@ -53,7 +55,6 @@ export const CreateListDialog = ({ setRegularDialogVisible, regularDialogVisible
             return toast?.toast('warn', 'Error', 'La lista es vacía.')
         setIsVisible(true)
     }
-
 
     return (
         <>
@@ -83,7 +84,6 @@ export const CreateListDialog = ({ setRegularDialogVisible, regularDialogVisible
                         style={{ fontSize: '14px' }}
                         filterHeaderStyle={{ zIndex: 100, padding: '0.5%' }}
                         sortable
-
                         filter />
                     <Column
                         field="chord"

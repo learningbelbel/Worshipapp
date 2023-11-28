@@ -7,22 +7,24 @@ import { useToast } from "../../../context/Context.Toast";
 import { Dialog } from "primereact/dialog";
 import { onChangeFunc } from "../../../utils/Util.HandleOnchange";
 import { SongModel } from "../../../models/Model.Song";
-import { OrdenarListComponent } from "./OrderComponent";
+import { OrdenarListComponent } from "./Component.OrderSongList";
 import { ScrollPanel } from "primereact/scrollpanel";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
+import { ParamsModel } from "../models/ParamsModel";
+import { ChordTemplate } from "../../../components/Component.ChordTemplate";
 
-interface ParamsModel {
-    notes: string[];
-    amount: string;
-}
-
-const initialParamsState = {
+const initialParamsState: ParamsModel = {
     notes: [],
     amount: '',
 }
 
-export const CreateRandomListDialog = ({ setIsVisible, isVisible }: any) => {
+interface Props {
+    setIsVisible: any;
+    isVisible: any;
+}
+
+export const CreateRandomListDialog = ({ setIsVisible, isVisible }: Props) => {
 
     const service = new SongService();
     const toast = useToast();
@@ -45,34 +47,24 @@ export const CreateRandomListDialog = ({ setIsVisible, isVisible }: any) => {
         setSongList(list.data.result)
     }
 
-    const chordTemplate = (rowData: SongModel) => {
-        return rowData.chord.map((chord: [], index: number) => {
-            return <small key={index}>{chord} <br /></small>
-        });
-    }
+    const footer = () => (
+        <>
+            {songList.length > 0 && <Button label="Continuar" onClick={() => { setIsVisibleSongList(true) }} />}
+        </>
+    )
 
-    const footer = () => {
-        return <>{
-            songList.length > 0 && (
-                <Button label="Continuar" onClick={() => { setIsVisibleSongList(true) }} />
-            )
-        }</>
-    }
-
-    const deleteSong = (rowData:any) =>{
-        console.log(rowData);
-
-        const updateList = songList.filter(song => song._id !== rowData._id )
-        console.log(updateList);
+    const deleteSong = (rowData: any) => {
+        const updateList = songList.filter(song => song._id !== rowData._id)
         setSongList(updateList);
     }
 
-    const actionBodyTemplate = (rowData: any) => {
-        return (
-            <>
-                <Button icon="pi pi-trash"  style={{border: 'none'}} outlined severity="danger" onClick={() => deleteSong(rowData)} />
-            </>
-        );
+    const deleteActionTemplate = (rowData: any) => {
+        return <Button
+            icon="pi pi-trash"
+            style={{ border: 'none', margin: '0', padding: '2% 0%' }}
+            outlined
+            severity="danger"
+            onClick={() => deleteSong(rowData)} />
     };
 
     return (
@@ -81,8 +73,7 @@ export const CreateRandomListDialog = ({ setIsVisible, isVisible }: any) => {
             visible={isVisible}
             onHide={() => setIsVisible(false)}
             footer={footer}
-            className="randomDialog"
-        >
+            className="randomDialog">
             <MultiSelect
                 name="notes"
                 value={params.notes}
@@ -112,9 +103,8 @@ export const CreateRandomListDialog = ({ setIsVisible, isVisible }: any) => {
                             value={songList}
                             id="_id">
                             <Column field='name' header='Nombre' headerStyle={{ display: 'none' }} />
-                            <Column field='chord' header='Nota' headerStyle={{ display: 'none' }} body={chordTemplate} />
-                            <Column body={actionBodyTemplate} headerStyle={{ display: 'none' }}  exportable={false}></Column>
-
+                            <Column headerStyle={{ display: 'none' }} body={(rowData) => <ChordTemplate rowData={rowData} />} />
+                            <Column body={deleteActionTemplate} headerStyle={{ display: 'none' }} exportable={false}></Column>
                         </DataTable>
                     </ScrollPanel>
                 )

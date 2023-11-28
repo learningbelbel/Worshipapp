@@ -2,7 +2,7 @@ import { SongListService } from "../../services/Service.ListService";
 import { useEffect, useState } from 'react';
 import { ListTableComponent } from "../Lists/components/Component.ListTable";
 import { DateAllocationDialog } from "../Lists/components/Component.DateAllocationDialog";
-import { PrimaryTitle } from "../../styledComponents/PrimaryTitle";
+import { PrimaryTitle } from "../../styled-components/PrimaryTitle";
 
 
 export const UserListPage = () => {

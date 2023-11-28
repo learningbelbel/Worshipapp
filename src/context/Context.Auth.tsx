@@ -4,6 +4,7 @@ import jwt_decode from 'jwt-decode'
 
 const LOGGED_USER = 'LOGGED_USER';
 const TOKEN = 'TOKEN';
+const PROFILE_PICTURE = 'PROFILE_PICTURE';
 
 interface DecodedToken {
     exp: number;
@@ -13,9 +14,10 @@ interface LoggedUserData {
     user: {
         name: string;
         email: string;
-        profile: string;
+        profile: string[];
         profilePictureUrl: string;
     },
+    profilePicture: string;
     token: string;
     isLoggedIn: boolean;
 }
@@ -24,7 +26,7 @@ interface ContextType {
     loggedUserData: LoggedUserData;
     handleLogin: (userData: LoggedUserData) => void;
     handleLogout: () => void
-    updateLoggedUserData: (userData: LoggedUserData) => void
+    updateProfilePicture: (url: string) => void
 }
 
 interface Props {
@@ -39,9 +41,10 @@ export const AuthContext = ({ children }: Props) => {
         user: {
             name: '',
             email: '',
-            profile: '',
+            profile: [],
             profilePictureUrl: '',
         },
+        profilePicture: '',
         token: '',
         isLoggedIn: false
     }
@@ -75,22 +78,24 @@ export const AuthContext = ({ children }: Props) => {
     const handleLogin = useCallback((userData: LoggedUserData) => {
         window.localStorage.setItem(LOGGED_USER, JSON.stringify(userData));
         window.localStorage.setItem(TOKEN, userData.token);
-        window.localStorage.setItem('ProfilePicture', userData.user.profilePictureUrl);
+        window.localStorage.setItem(PROFILE_PICTURE, userData.user.profilePictureUrl);
     }, [])
 
     const handleLogout = useCallback(() => {
         window.localStorage.removeItem(LOGGED_USER);
         window.localStorage.removeItem(TOKEN);
+        window.localStorage.removeItem(PROFILE_PICTURE);
     }, [])
-    const updateLoggedUserData = useCallback((userData: LoggedUserData) => {
-        window.localStorage.setItem(LOGGED_USER, JSON.stringify(userData));
+    
+    const updateProfilePicture = useCallback((url: string) => {
+        window.localStorage.setItem(PROFILE_PICTURE, url);
     },[])
 
     const useAuthContextValue = useMemo(() => ({
         loggedUserData,
         handleLogin,
         handleLogout,
-        updateLoggedUserData
+        updateProfilePicture
 
     }), [loggedUserData])
 

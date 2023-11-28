@@ -1,12 +1,9 @@
-import { DOMAIN } from "../config/Config.EndPoints";
-import { HttpProvider } from "./HttpProvider";
+import { BaseService } from "./Service.Base";
 
-export class ExpensesService {
-
-    http = new HttpProvider();
+export class ExpensesService extends BaseService {
 
     async createExpense(data: any) {
-        return await this.http.post(`${DOMAIN}/expenses`, data)
+        return await this.http.post(this.env.CREATE_EXPENSES, data)
     }
 
 }

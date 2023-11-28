@@ -1,10 +1,8 @@
-import { FINANCE_CONTROL_ROUTE } from '../config/Config.EndPoints';
-import { HttpProvider } from './HttpProvider';
+import { BaseService } from './Service.Base';
 
-export class FinanceControlService {
-    httpProvider = new HttpProvider()
-    
-    async createFinanceControl(data: any){
-        return this.httpProvider.post(FINANCE_CONTROL_ROUTE, data);
+export class FinanceControlService extends BaseService {
+
+    async createFinanceControl(data: any) {
+        return this.http.post(this.env.FINANCE_CONTROL_ROUTE, data);
     }
 }

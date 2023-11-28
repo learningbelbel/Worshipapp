@@ -30,7 +30,8 @@ export const ContributionPlan = () => {
     }
 
     return (
-        <div className="flex flex-wrap justify-content-center gap-3">
+        <div className="finances-card">
+
             <div className="container">
                 <div className="card-container">
                     <div className="card-content">
@@ -42,6 +43,7 @@ export const ContributionPlan = () => {
                     </div>
                 </div>
             </div>
+
             <div className="container ">
                 <div className="card-container">
                     <div className="card-content">
@@ -53,6 +55,7 @@ export const ContributionPlan = () => {
                     </div>
                 </div>
             </div>
+
             <div className="container">
                 <div className="card-container">
                     <div className="card-content">
@@ -65,7 +68,7 @@ export const ContributionPlan = () => {
                 </div>
             </div>
 
-            <div className="container mb-3">
+            <div className="container">
                 <div className="card-container">
                     <div className="w-full text-center">
                         <h2>Total</h2>

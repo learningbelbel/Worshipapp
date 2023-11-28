@@ -6,9 +6,12 @@ import { Menu } from "primereact/menu";
 import { MenuItem } from "primereact/menuitem";
 import { useRef, useState } from 'react';
 import esLocale from 'date-fns/locale/es';
+import { useAuthContext } from "../../../context/Context.Auth";
 
 
 export const ListTableComponent = ({ lists, listData, setListData, setIsVisible }: any) => {
+
+    const { loggedUserData: { user } } = useAuthContext()!
 
     const [expandedRows, setExpandedRows] = useState<DataTableExpandedRows | any[]>([]);
 
@@ -77,10 +80,11 @@ export const ListTableComponent = ({ lists, listData, setListData, setIsVisible 
             expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
             rowExpansionTemplate={rowExpansionTemplate}
             dataKey="_id"
+            emptyMessage="Sin datos"
             style={{ zIndex: '0' }}>
             <Column expander style={{ width: '5rem' }} />
             <Column field="date" header="Fecha" body={dateTemplate} />
-            <Column body={actionBodyTemplate} header="Acción" exportable={false}></Column>
+            <Column body={user.profile.includes('SINGER') && actionBodyTemplate} header="Acción" exportable={false}></Column>
 
         </DataTable>
     )

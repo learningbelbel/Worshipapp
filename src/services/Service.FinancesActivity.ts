@@ -1,10 +1,8 @@
-import { DOMAIN } from "../config/Config.EndPoints";
-import { HttpProvider } from "./HttpProvider";
+import { BaseService } from "./Service.Base";
 
-export class FinancesActivity {
-    http = new HttpProvider();
+export class FinancesActivity extends BaseService {
 
     async getActivities(){
-        return this.http.get(`${DOMAIN}/activities`)
+        return this.http.get(this.env.GET_ACTIVITIES);
     }
 }

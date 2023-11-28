@@ -27,7 +27,6 @@ export const FinanceActivity = () => {
 };
 
   const customizedContent = (item: any) => {
-    console.log(item.amount)
     return (
       <div className='timeline-content'>
         <h3>{`${item.created_by.name} ${item.created_by.lastName}`}</h3>
@@ -40,7 +39,7 @@ export const FinanceActivity = () => {
   return (
     <div className="scroll-container mb-4" >
       <ScrollPanel className='scroll-style' >
-        <h5>Actividad</h5>
+        <h2>Actividad</h2>
         <Timeline
           value={activities}
           content={customizedContent}

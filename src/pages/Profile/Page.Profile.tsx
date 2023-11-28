@@ -4,6 +4,7 @@ import { STORAGE_URL } from '../../config/Config.EndPoints';
 import { UserService } from '../../services/Service.User';
 import { ProfilePictureComponent } from './components/ProfilePictureComponent';
 import { UserInformation } from './components/UserInformation';
+import './theme/style.css'
 
 const initalUserInformation: UserMember = {
     name: '',
@@ -11,7 +12,8 @@ const initalUserInformation: UserMember = {
     email: '',
     profile: '',
     profilePicture: '',
-    status: ''
+    status: '',
+    birthDate: null,
 }
 
 export const ProfilePage = () => {
@@ -41,12 +43,11 @@ export const ProfilePage = () => {
                 profilePicture={profilePicture}
                 userInformation={userInformation}
                 setIsLoading={setIsLoading}
-s
             />
             <UserInformation
                 userInformation={userInformation}
                 setUserInformation={setUserInformation}
-                setIsLoading={setIsLoading}
+                service={userService}
             />
 
         </div>

@@ -6,10 +6,17 @@ import { ListPage } from "../pages/Lists/Page.List";
 import { ContributionsPage } from "../pages/Contributions/Page.Finances";
 import { AiOutlineContainer, AiOutlineHome } from 'react-icons/ai';
 import { BsMusicNoteBeamed, BsMusicNoteList } from 'react-icons/bs'
+import { FcMoneyTransfer } from 'react-icons/fc';
 import { ProfilePage } from "../pages/Profile/Page.Profile";
 import { UserFinancesPage } from "../pages/UserFinances/Page.UserFinances";
 import { UserListPage } from "../pages/UserLists/Page.UserLists";
 import { FinancesPage } from "../pages/Finances/Page.Finances";
+import { RegisterPage } from "../pages/Register/Page.Register";
+import { ForgotPasswordPage } from "../pages/ForgotPassword/Page.ForgotPassword";
+import { AdminPage } from "../pages/Admin/Page.Admin";
+
+import { TiSpannerOutline } from "react-icons/ti";
+
 interface RouteModel {
     title?: string;
     icon?: React.ReactNode;
@@ -22,142 +29,94 @@ interface RouterModel {
     }
 }
 
+const commonRoutes = [
+    {
+        title: 'Inicio',
+        path: '/',
+        element: <HomePage />,
+        icon: <AiOutlineHome />
+    },
+    {
+        title: 'Canciones',
+        path: '/songs',
+        element: <SongListPage />,
+        icon: <BsMusicNoteBeamed />
+    },
+    {
+        title: 'Listados',
+        path: '/songList',
+        element: <ListPage />,
+        icon: <BsMusicNoteList />
+    },
+    {
+        title: 'Finanzas',
+        path: '/finances',
+        element: <FinancesPage />,
+        icon: <FcMoneyTransfer />
+    }
+]
+
+const profileRoutes = [
+    {
+        path: '/myFinances',
+        element: <UserFinancesPage />,
+    },
+    {
+        path: '/profile',
+        element: <ProfilePage />,
+    },
+    {
+        path: '*', element: <Navigate to="/" />
+    }
+]
+
+const adminRoutes = [
+    {
+        path: '/admin',
+        element: <AdminPage/>,
+        title: 'Admin',
+        icon: <TiSpannerOutline />
+    }
+]
+
 export const RoutesData: RouterModel = {
     'MUSICIAN': {
         routes: [
-            {
-                title: 'INICIO',
-                path: '/',
-                element: <HomePage />,
-                icon: <AiOutlineHome />
-            },
-            {
-                title: 'CANCIONES',
-                path: '/songs',
-                element: <SongListPage />,
-                icon: <BsMusicNoteBeamed />
-            },
-            {
-                title: 'LISTADOS',
-                path: '/songList',
-                element: <ListPage />,
-                icon: <BsMusicNoteList/>
-            },
-            {
-                title: 'FINANZAS',
-                path: '/finances',
-                element: <FinancesPage />,
-                icon: <AiOutlineContainer/>
-            },
-            {
-                path: '/myFinances',
-                element: <UserFinancesPage />,
-            },
+            ...commonRoutes,
+            ...profileRoutes
+        ]
+    },
+    'SINGER': {
+        routes: [
             {
                 path: '/myLists',
-                element: <UserListPage/>
-            },
-            {
-                path: '/profile',
-                element: <ProfilePage />,
-            },
-            {
-                path: '*', element: <Navigate to="/" />
+                element: <UserListPage />
             }
         ]
     },
     'TREASURER': {
         routes: [
             {
-                title: 'INICIO',
-                path: '/',
-                element: <HomePage />,
-                icon: <AiOutlineHome />
-            },
-            {
-                title: 'CANCIONES',
-                path: '/songs',
-                element: <SongListPage />,
-                icon: <BsMusicNoteBeamed />
-            },
-            {
-                title: 'LISTADOS',
-                path: '/songList',
-                element: <ListPage />,
-                icon: <BsMusicNoteList/>
-            },
-            {
-                title: 'APORTES',
+                title: 'Aportes',
                 path: '/contributions',
                 element: <ContributionsPage />,
-                icon: <AiOutlineContainer/>
+                icon: <AiOutlineContainer />
             },
-            {
-                title: 'FINANZAS',
-                path: '/finances',
-                element: <FinancesPage />,
-                icon: <AiOutlineContainer/>
-            },
-            {
-                path: '/myFinances',
-                element: <UserFinancesPage />,
-            },
-            {
-                path: '/myLists',
-                element: <UserListPage/>
-            },
-            {
-                path: '/profile',
-                element: <ProfilePage />,
-            },
-            {
-                path: '*', element: <Navigate to="/" />
-            }
         ]
     },
     'SECRETARY': {
         routes: [
             {
-                title: 'INICIO',
-                path: '/',
-                element: <HomePage />,
-                icon: <AiOutlineHome />
-            },
-            {
-                title: 'CANCIONES',
-                path: '/songs',
-                element: <SongListPage />,
-                icon: <BsMusicNoteBeamed />
-            },
-            {
-                title: 'LISTADOS',
-                path: '/songList',
-                element: <ListPage />,
-                icon: <BsMusicNoteList/>
-            },
-            {
-                title: 'APORTES',
+                title: 'Aportes',
                 path: '/contributions',
                 element: <ContributionsPage />,
-                icon: <AiOutlineContainer/>
+                icon: <AiOutlineContainer />
             },
-            {
-                title: 'FINANZAS',
-                path: '/finances',
-                element: <FinancesPage />,
-                icon: <AiOutlineContainer/>
-            },
-            {
-                path: '/myFinances',
-                element: <UserFinancesPage />,
-            },
-            {
-                path: '/profile',
-                element: <ProfilePage />,
-            },
-            {
-                path: '*', element: <Navigate to="/" />
-            }
+        ]
+    },
+    'ADMIN': {
+        routes: [
+            ...adminRoutes
         ]
     },
     'default': {
@@ -165,6 +124,14 @@ export const RoutesData: RouterModel = {
             {
                 path: '/login',
                 element: <LoginPage />
+            },
+            {
+                path: '/register',
+                element: <RegisterPage />
+            },
+            {
+                path: '/forgotPassword',
+                element: <ForgotPasswordPage />
             },
             {
                 path: '*', element: <Navigate to="/login" />

@@ -1,3 +1,4 @@
+
 export interface UserMember {
     name: string;
     lastName: string;
@@ -5,4 +6,6 @@ export interface UserMember {
     email: string;
     profilePicture:string;
     status: string;
+    birthDate: Date | null;
+
 }

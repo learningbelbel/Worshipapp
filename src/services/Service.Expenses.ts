@@ -1,10 +1,8 @@
-import { DOMAIN } from "../config/Config.EndPoints";
-import { HttpProvider } from "./HttpProvider";
+import { BaseService } from "./Service.Base";
 
-export class IncomeService {
-    http = new HttpProvider();
+export class IncomeService extends BaseService{
 
     async createIncome(data: any) {
-        return await this.http.post(`${DOMAIN}/incomes`, data)
+        return await this.http.post(this.env.CREATE_INCOME, data)
     }
 }

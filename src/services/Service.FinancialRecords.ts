@@ -1,19 +1,17 @@
-import { DOMAIN } from "../config/Config.EndPoints";
-import { HttpProvider } from "./HttpProvider";
+import { BaseService } from "./Service.Base";
 
 
-export class FinancialRecords {
-    httpProvider = new HttpProvider();
+export class FinancialRecords extends BaseService {
 
     async getPlanContributionTotal(){
-        return await this.httpProvider.get(`${DOMAIN}/contribution/total`);
+        return await this.http.get(this.env.GET_TOTAL_PLAN_CONTRIBUTION);
     }
 
     async getTotalIncomes(){
-        return await this.httpProvider.get(`${DOMAIN}/incomes/total`);
+        return await this.http.get(this.env.GET_TOTAL_INCOMES);
     }
 
     async getTotalExpenses(){
-        return await this.httpProvider.get(`${DOMAIN}/expenses/total`);
+        return await this.http.get(this.env.GET_TOTAL_EXPENSES);
     }
 }

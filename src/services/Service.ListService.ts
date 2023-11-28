@@ -1,19 +1,17 @@
-import { SONG_LIST_ROUTE } from '../config/Config.EndPoints';
-import { HttpProvider } from './HttpProvider';
+import { BaseService } from './Service.Base';
 
-export class SongListService {
-    httpProvider = new HttpProvider();
+export class SongListService extends BaseService{
 
     async createList(data: any) {
-        return await this.httpProvider.post(SONG_LIST_ROUTE, data)
+        return await this.http.post(this.env.CREATE_SONG_LIST, data)
     }
     async getCurrentList() {
-        return await this.httpProvider.get(`${SONG_LIST_ROUTE}/current`)
+        return await this.http.get(this.env.GET_CURRENT_SONG_LIST)
     }
     async getAllList() {
-        return await this.httpProvider.get(SONG_LIST_ROUTE)
+        return await this.http.get(this.env.GET_SONG_LISTS);
     }
     async getListByUser() {
-        return await this.httpProvider.get(`${SONG_LIST_ROUTE}/userLists`);
+        return await this.http.get(this.env.GET_SONG_LIST_BY_USER);
     }
 }

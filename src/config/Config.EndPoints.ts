@@ -1,10 +1,1 @@
-// export const DOMAIN = 'http://localhost:4000';
 export const STORAGE_URL = 'https://storage.googleapis.com/appjorband-storage';
-export const DOMAIN = 'https://wafront.wn.r.appspot.com/'
-export const LOGINROUTE = `${DOMAIN}/auth`
-export const USER_ROUTE =  `${DOMAIN}/users`
-export const CONTRIBUTION_ROUTE = `${DOMAIN}/contribution`
-export const SONG_ROUTE = `${DOMAIN}/song`
-export const SONG_LIST_ROUTE = `${DOMAIN}/songList`
-export const FINANCE_CONTROL_ROUTE = `${DOMAIN}/financeControl`
-export const UPLOADS = `${DOMAIN}/upload`

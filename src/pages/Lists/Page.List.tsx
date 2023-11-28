@@ -35,7 +35,7 @@ export const ListPage = () => {
 
     return (
         <div className="page-container">
-            <div className="card mb-2">
+            <div className="col-12 content-header">
                 <h2>Listados de Canciones</h2>
             </div>
             <div className="card">

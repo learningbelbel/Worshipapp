@@ -1,10 +1,8 @@
-import { HttpProvider } from "./HttpProvider";
-import { USER_ROUTE } from '../config/Config.EndPoints'
+import { BaseService } from "./Service.Base";
 
-export class RegisterService {
-    httpProvider = new HttpProvider();
+export class RegisterService extends BaseService {
 
     async createUser(data: any) {
-        return await this.httpProvider.post(USER_ROUTE, data)
+        return await this.http.post(this.env.USER_ROUTE, data)
     }
 }

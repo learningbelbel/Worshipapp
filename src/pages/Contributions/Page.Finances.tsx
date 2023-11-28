@@ -1,24 +1,23 @@
-import { FinancesControl } from './FinancesControl';
-import { PlanDisplay } from './components/Component.ContributionPlan';
+import { FinancesControl } from './components/FinancesControl';
+import { ContributionPlan } from './components/ContributionPlan';
 import { useAuthContext } from "../../context/Context.Auth";
+import { SECRETARY, TREASURER } from '../../utils/Util.Constants';
 
 export const ContributionsPage = () => {
     const { loggedUserData: { user } } = useAuthContext()!;
 
     return (
         <div className="page-container">
-            <div className="page-content">
-                {
-                    user.profile.includes('TREASURER') && (
-                        <PlanDisplay />
-                    )
-                }
-                {
-                    user.profile.includes('SECRETARY') && (
-                        <FinancesControl />
-                    )
-                }
-            </div>
+            {
+                user.profile.includes(TREASURER.toString()) && (
+                    <ContributionPlan />
+                )
+            }
+            {
+                user.profile.includes(SECRETARY) && (
+                    <FinancesControl />
+                )
+            }
         </div>
     );
 }

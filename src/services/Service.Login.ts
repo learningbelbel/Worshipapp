@@ -1,10 +1,8 @@
-import { HttpProvider } from './HttpProvider';
-import { LOGINROUTE } from '../config/Config.EndPoints'
+import { BaseService } from './Service.Base';
 
-export class LoginService {
-    httpProvider = new HttpProvider();
+export class LoginService extends BaseService {
 
-    async post(data: any) {
-        return await this.httpProvider.post(LOGINROUTE, data);
+    async login(data: any) {
+        return await this.http.post(this.env.LOGINROUTE, data);
     }
 }

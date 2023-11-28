@@ -2,7 +2,7 @@ import { Column } from "primereact/column"
 import { DataTable, DataTableExpandedRows, DataTableValueArray } from "primereact/datatable"
 import { useState } from 'react';
 import { TableTemplate } from "../../../components/Component.TableTemplate";
-import { PrimaryTitle } from "../../../styledComponents/PrimaryTitle";
+import { PrimaryTitle } from "../../../styled-components/PrimaryTitle";
 
 export const PromisesControl = ({ user }: any) => {
 

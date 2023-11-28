@@ -23,11 +23,12 @@ export const AxiosInterceptor = () => {
 
     axios.interceptors.response.use(
         (response) => {
-            console.log(response);
+            // console.log(response);
             return response;
         },
         (error) => {
-            console.log(error);
+            // console.log(error);
+            
             return error;
         }
 

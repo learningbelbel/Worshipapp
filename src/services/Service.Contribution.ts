@@ -1,16 +1,11 @@
-import { CONTRIBUTION_ROUTE } from '../config/Config.EndPoints';
-import { HttpProvider } from './HttpProvider';
+import { BaseService } from './Service.Base';
 
-export class ContributionService {
-    httpProvider = new HttpProvider();
+export class ContributionService extends BaseService {
 
     async createContribution(data: any) {
-        return await this.httpProvider.post(`${CONTRIBUTION_ROUTE}/create`, data)
+        return await this.http.post(this.env.CREATE_CONTRIBUTION, data)
     }
     async getContributionList(){
-        return await this.httpProvider.get(`${CONTRIBUTION_ROUTE}/get`)
-    }
-    getCustomersMedium() {
-        return Promise.resolve(this.getContributionList());
+        return await this.http.get(this.env.GET_CONTRIBUTIONS)
     }
 }

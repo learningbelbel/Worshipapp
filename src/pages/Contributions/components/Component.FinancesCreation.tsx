@@ -1,7 +1,7 @@
 import { Button } from 'primereact/button'
 import { Menu } from 'primereact/menu';
 import { useRef, useState } from 'react';
-import { PrimaryTitle } from '../../../styledComponents/PrimaryTitle';
+import { PrimaryTitle } from '../../../styled-components/PrimaryTitle';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 import { Calendar } from 'primereact/calendar';
@@ -10,32 +10,30 @@ import { onChangeFunc } from '../../../utils/Util.HandleOnchange';
 import { useToast } from '../../../context/Context.Toast';
 import { IncomeService } from '../../../services/Service.Expenses';
 import { ExpensesService } from '../../../services/Service.Incomes';
-
-interface IncomeExpenseModel {
-    description: string;
-    date: Date | null;
-    amount: string;
-}
+import { IncomeExpenseModel } from '../models/model.IncomeExpense';
 
 export const FinancesCreation = () => {
 
+    const toast = useToast();
+    const service = new IncomeService();
+    const expenseService = new ExpensesService();
     const menu = useRef<Menu>(null);
+    
     const items = [
         {
             label: 'Opciones',
             items: [
                 {
                     label: 'Crear Ingreso',
-                    icon: 'pi pi-external-link',
+                    icon: 'pi pi-window-maximize',
                     command: () => {
-                        console.log('Created')
                         setDialogVisibility(true);
                         setTitle('Ingreso');
                     }
                 },
                 {
                     label: 'Crear Egreso',
-                    icon: 'pi pi-external-link',
+                    icon: 'pi pi-window-minimize',
                     command: () => {
                         setDialogVisibility(true)
                         setTitle('Egreso');
@@ -51,10 +49,6 @@ export const FinancesCreation = () => {
         amount: ''
     }
 
-    const toast = useToast();
-    const service = new IncomeService();
-    const expenseService = new ExpensesService();
-
     const [data, setData] = useState(initialData);
     const [dialogVisibility, setDialogVisibility] = useState(false);
     const [title, setTitle] = useState('')
@@ -63,9 +57,9 @@ export const FinancesCreation = () => {
         onChangeFunc(e, data, setData)
     }
 
-    const handleEmptyField = () => {
+    const handleValidateFields = () => {
         if (!data.description || !data.date || !data.amount) {
-            toast?.toast('warn', 'Error', 'Todos lo campos deben estar llenos.')
+            return toast?.toast('warn', 'Error', 'Todos lo campos deben estar llenos.')
         }
 
         if (title === 'Ingreso') {
@@ -97,7 +91,7 @@ export const FinancesCreation = () => {
     }
 
     return (
-        <div className='card flex justify-content-between align-items-center mb-5' >
+        <div className=' flex justify-content-between align-items-center mb-5' >
             <Menu
                 model={items}
                 popup
@@ -106,7 +100,7 @@ export const FinancesCreation = () => {
 
             <PrimaryTitle title='Contribuciones' />
             <Button
-                label="Otros"
+                label="Nuevo"
                 icon="pi pi-ellipsis-v"
                 className="mr-2"
                 style={{ background: 'transparent', color: '#000', border: 'none' }}
@@ -137,12 +131,12 @@ export const FinancesCreation = () => {
                 </div>
 
                 <div className="card flex align-items-center mt-2 col-11">
-                    <label className='col-4' htmlFor="">Aporte Total: </label>
+                    <label className='col-4' htmlFor="">Monto: </label>
                     <InputText value={data.amount} name="amount" onChange={handleOnchange} className="w-full" />
                 </div>
 
                 <div className='card flex flex-row-reverse col-11'>
-                    <Button label='Guardar' onClick={() => handleEmptyField()} />
+                    <Button label='Guardar' onClick={() => handleValidateFields()} />
                 </div>
             </Dialog >
         </div>

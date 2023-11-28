@@ -1,25 +1,32 @@
-import { UPLOADS, USER_ROUTE } from '../config/Config.EndPoints';
-import { HttpProvider } from './HttpProvider';
+// import { environment } from '../environment/Enviroment';
+import { BaseService } from './Service.Base';
 
-export class UserService {
-    httpProvider = new HttpProvider()
-    
-    async getUsers(){
-        return this.httpProvider.get(`${USER_ROUTE}/list`);
+// const env = environment.END_POINTS.USER_ROUTE;
+// console.log(env);
+export class UserService extends BaseService {    
+    async getUsers() {
+        return this.http.get(`${this.env.USER_ROUTE}/list`);
     }
-    async getUsersById(){
-        return this.httpProvider.get(`${USER_ROUTE}/userProfile`);
+    async getUsersById() {
+        return this.http.get(`${this.env.USER_ROUTE}/userInformation`);
     }
-    async getUserContributions(){
-        return this.httpProvider.get(`${USER_ROUTE}/finances/contribution`);
+    async getUserContributions() {
+        return this.http.get(`${this.env.USER_ROUTE}/finances/contribution`);
     }
-    async getUsersFinancesControl(){
-        return this.httpProvider.get(`${USER_ROUTE}/finances/control`);
+    async getUsersFinancesControl() {
+        return this.http.get(`${this.env.USER_ROUTE}/finances/control`);
     }
-    async getFinancesByUser(){
-        return this.httpProvider.get(`${USER_ROUTE}/userFinances`);
+    async getFinancesByUser() {
+        return this.http.get(`${this.env.USER_ROUTE}/userFinances`);
     }
-    async updateProfilePicture(data: any){
-        return this.httpProvider.post(UPLOADS, data);
+    async getUserProfiles(userId: string) {
+        return this.http.get(`${this.env.USER_ROUTE}/userProfiles/${userId}`);
+    }
+    async updateUserInformation(data: object){ 
+        return this.http.put(`${this.env.USER_ROUTE}/userInformation`, data);
+    }
+
+    async updateProfilePicture(data: any) {
+        return this.http.post(this.env.UPLOADS, data);
     }
 }
